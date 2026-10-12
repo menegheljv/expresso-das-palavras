@@ -298,3 +298,14 @@ main:has(#inicio.ativa) { align-items: flex-start; padding-top: 0; }
 
 /* O cenário agora é desenhado até as laterais: sem faixas de preenchimento */
 .cenario { background: none; }
+
+/* ===== Jacupemba e título mais à esquerda ===== */
+#inicio.ativa { grid-template-columns: minmax(260px, 360px) minmax(0, 640px); margin-left: clamp(0px, .6vw, 16px); gap: var(--e5); }
+@media (max-width: 760px) { #inicio.ativa { grid-template-columns: 1fr; margin-left: 0; } }
+
+/* ===== Frase centralizada e estações um pouco mais abaixo ===== */
+#inicio .inicio-texto .lead { text-align: center; margin-inline: auto; margin-bottom: var(--e6); }
+@media (max-width: 760px) { #inicio .inicio-texto .lead { margin-bottom: var(--e5); } }
+
+/* A tela inicial não anima a entrada: a jacupemba é fixa no cenário e precisa de referência estável */
+#inicio.ativa { animation: none; }
