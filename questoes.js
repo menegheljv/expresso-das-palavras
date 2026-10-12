@@ -66,15 +66,15 @@ window.QUESTOES = [
     certa: 3, d: D.D12
   },
   {
-    est: 1, fonte: 'Tirinha do Armandinho, de Beck', img: 'tirinha-rio.jpg',
-    alt: 'Tirinha em quadrinhos em que um menino indígena conversa com Armandinho sobre a origem da palavra "carioca", terminando com uma imagem do Pão de Açúcar.',
-    pergunta: 'O gênero desse texto é um(a)',
-    alts: ['conto.', 'tirinha.', 'charge.', 'carta do leitor.'],
-    certa: 1, d: D.GEN
+    est: 1, fonte: 'Texto "Anne e a Casa dos Sonhos"',
+    trecho: '"Anne e a Casa dos Sonhos" é o quinto livro da série Anne de Green Gables. Mais uma vez somos encantados com o jeito particular e incrível de Anne de construir laços tão intensos em qualquer lugar que ela vai. Os personagens são ótimos e muito bem desenvolvidos, nos levando a torcer para que tudo dê certo no final.',
+    pergunta: 'Esse texto é',
+    alts: ['uma carta.', 'uma crônica.', 'uma notícia.', 'uma resenha.'],
+    certa: 3, d: D.P017
   },
   {
-    est: 1, fonte: 'Tirinha da Turma da Mônica, de Maurício de Sousa', img: 'tirinha-ze-lele.jpg',
-    alt: 'Tirinha em preto e branco: um menino pendurado no galho de uma árvore diz "Ô Zé Lelé! Num fica aí parado! Faz alguma coisa!", enquanto o outro menino brinca com uma bola.',
+    est: 1, fonte: 'Tirinha da Turma da Mônica, de Maurício de Sousa',
+    trecho: 'Ô Zé Lelé! Num fica aí parado! Faz alguma coisa!',
     pergunta: 'O trecho "Num fica aí parado!" é um exemplo de linguagem',
     alts: ['científica.', 'coloquial.', 'técnica.', 'formal.'],
     certa: 1, d: D.D13
