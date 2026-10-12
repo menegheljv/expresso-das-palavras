@@ -350,3 +350,10 @@ main:has(#inicio.ativa) { align-items: flex-start; padding-top: 0; }
   #inicio .inicio-esq .etiqueta { margin-bottom: var(--e3); }
   #inicio .inicio-esq .mascote-grande { margin-top: -18px; }
 }
+
+/* ===== Abas de volta ao cabeçalho (padrão); título um pouco mais abaixo ===== */
+body:has(#inicio.ativa) .topo .nav { display: flex; }
+.nav-inicio { display: none; }
+@media (min-width: 761px) {
+  #inicio .inicio-esq { margin-top: clamp(24px, 7vh, 72px); }
+}
