@@ -367,3 +367,8 @@ body:has(#inicio.ativa) .topo .nav { display: flex; }
 @media (min-width: 761px) {
   #inicio .inicio-esq .mascote-grande { width: min(240px, 29vh); }
 }
+
+/* ===== Estações um pouquinho mais acima ===== */
+@media (min-width: 761px) {
+  #inicio .inicio-texto { padding-top: clamp(36px, 11.5vh, 100px); }
+}
