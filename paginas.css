@@ -362,3 +362,8 @@ body:has(#inicio.ativa) .topo .nav { display: flex; }
 @media (min-width: 761px) {
   #inicio .inicio-texto { padding-top: clamp(48px, 14vh, 120px); }
 }
+
+/* ===== Jacupemba um pouco menor na tela inicial (computador) ===== */
+@media (min-width: 761px) {
+  #inicio .inicio-esq .mascote-grande { width: min(240px, 29vh); }
+}
