@@ -283,3 +283,18 @@ button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 @media (max-width: 760px) {
   .btn-mini, .btn-sec, .btn-prox, .btn-grande { min-height: 48px; }
 }
+
+/* ===== Jacupemba em pé no topo da cachoeira ===== */
+.mascote-grande.no-cenario { position: fixed; z-index: 2; margin: 0; max-width: none; pointer-events: none; }
+
+/* ===== Início mais acima e mais à esquerda ===== */
+main:has(#inicio.ativa) { align-items: flex-start; padding-top: 0; }
+#inicio.ativa { justify-content: start; margin-left: clamp(0px, 3vw, 64px); }
+#inicio .inicio-texto { padding-top: 0; }
+#inicio .inicio-esq { padding-top: 0; }
+@media (max-width: 760px) {
+  #inicio.ativa { margin-left: 0; justify-content: stretch; }
+}
+
+/* O cenário agora é desenhado até as laterais: sem faixas de preenchimento */
+.cenario { background: none; }

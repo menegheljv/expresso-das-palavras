@@ -61,8 +61,8 @@ p, li, blockquote, .alt-txt { text-wrap: pretty; }
 .agua line:nth-child(2n) { animation-duration: 1.8s; }
 .agua line:nth-child(3n) { animation-duration: 3s; }
 @keyframes cai { to { stroke-dashoffset: -72; } }
-.trem-cena { animation: passa 50s linear infinite; animation-delay: -14s; }
-@keyframes passa { from { transform: translateX(-520px); } to { transform: translateX(1500px); } }
+.trem-cena { animation: passa 75s linear infinite; animation-delay: -30s; }
+@keyframes passa { from { transform: translateX(-760px); } to { transform: translateX(1900px); } }
 
 /* Topo e rodapé */
 .topo, main, .rodape { position: relative; z-index: 1; }
