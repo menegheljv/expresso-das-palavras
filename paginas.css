@@ -1,0 +1,111 @@
+/* Navegação */
+.nav { display: flex; gap: var(--e2); }
+.nav button {
+  min-height: 44px; padding: 0 var(--e5);
+  background: transparent; color: var(--ink);
+  border: var(--borda); border-radius: var(--r3);
+  font: 800 1rem var(--corpo); cursor: pointer;
+  transition: background .15s, transform .12s;
+}
+.nav button:hover { background: var(--branco); transform: translateY(-2px); }
+.nav button[aria-current="page"] { background: var(--amarelo); box-shadow: 0 3px 0 var(--ink); }
+
+/* Atalhos e botões pequenos */
+.atalhos { display: flex; flex-wrap: wrap; gap: var(--e3); margin-top: var(--e5); }
+.btn-sec, .btn-mini {
+  min-height: 44px; padding: 0 var(--e5);
+  background: var(--branco); color: var(--ink);
+  border: var(--borda); border-radius: var(--r3);
+  font: 800 1rem var(--corpo); cursor: pointer;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform .12s ease-out, box-shadow .12s ease-out;
+}
+.btn-sec:hover, .btn-mini:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+.btn-sec:active, .btn-mini:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+.btn-mini { background: var(--turquesa); }
+.revise .btn-mini { margin-top: var(--e4); }
+
+/* Páginas de estudo */
+.tela.pagina.ativa { display: block; max-width: 880px; align-self: flex-start; padding-bottom: var(--e8); }
+main:has(.pagina.ativa) { align-items: flex-start; }
+.tit-pag { margin: 0 0 var(--e4); font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.05; letter-spacing: -.02em; font-weight: 800; max-width: 22ch; }
+.pagina .lead { max-width: 52ch; }
+.fecho { margin-top: var(--e7); text-align: center; }
+
+.topicos { display: grid; gap: var(--e3); }
+.topico { background: var(--branco); border: var(--borda); border-radius: var(--r2); box-shadow: 0 4px 0 var(--ink); }
+.topico summary {
+  display: flex; align-items: center; gap: var(--e4);
+  min-height: 64px; padding: var(--e3) var(--e5);
+  list-style: none; cursor: pointer;
+}
+.topico summary::-webkit-details-marker { display: none; }
+.topico summary::after { content: "+"; margin-left: auto; font: 800 1.75rem/1 var(--titulo); transition: transform .25s; }
+.topico[open] summary::after { transform: rotate(45deg); }
+.topico[open] summary { border-bottom: var(--borda); }
+.topico .num {
+  flex: none; width: 40px; height: 40px; display: grid; place-items: center;
+  background: var(--amarelo); border: var(--borda); border-radius: 50%;
+  font: 800 1.125rem var(--titulo);
+}
+.topico .tt { font: 800 clamp(1.125rem, 2.4vw, 1.375rem)/1.2 var(--titulo); }
+.topico .cod { margin-left: var(--e2); padding: 2px var(--e3); background: var(--papel); border: 2px solid var(--ink); border-radius: var(--r3); font-weight: 800; font-size: .8125rem; white-space: nowrap; }
+.topico .corpo { padding: var(--e5); display: grid; gap: var(--e4); animation: entra .35s ease-out; }
+.topico .resumo { margin: 0; font-size: 1.125rem; max-width: 62ch; }
+.caixa { padding: var(--e3) var(--e4); border: var(--borda); border-radius: var(--r1); }
+.caixa h4 { margin: 0 0 var(--e1); font: 800 .8125rem var(--corpo); letter-spacing: .08em; text-transform: uppercase; }
+.caixa p { margin: 0; max-width: 62ch; }
+.caixa.como { background: var(--papel); }
+.caixa.exemplo { background: #dff4ff; }
+.caixa.dica { background: #fff3c4; }
+.caixa mark { background: var(--amarelo); color: var(--ink); font-weight: 800; padding: 0 var(--e1); border-radius: 6px; }
+.corpo .btn-mini { justify-self: start; }
+
+.lista-def { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: var(--e2) var(--e4); }
+.lista-def dt { font-weight: 800; padding: 2px var(--e3); background: var(--papel); border: 2px solid var(--ink); border-radius: var(--r1); align-self: start; }
+.lista-def dd { margin: 0; align-self: center; }
+
+/* A prova */
+.bloco { margin-top: var(--e7); }
+.bloco h3 { margin: 0 0 var(--e3); font-size: clamp(1.5rem, 3.4vw, 2rem); letter-spacing: -.01em; }
+.bloco p { max-width: 66ch; margin: 0 0 var(--e3); }
+.anatomia { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--e4); }
+.parte { padding: var(--e4); background: var(--branco); border: var(--borda); border-radius: var(--r2); box-shadow: 0 4px 0 var(--ink); }
+.parte .rotulo { display: inline-block; margin-bottom: var(--e2); padding: 2px var(--e3); background: var(--amarelo); border: 2px solid var(--ink); border-radius: var(--r3); font-weight: 800; font-size: .875rem; }
+.parte .amostra { margin: 0 0 var(--e2); font-style: italic; font-weight: 700; }
+.parte small { display: block; font-size: .9375rem; }
+.passos { margin: 0; padding: 0; list-style: none; counter-reset: p; display: grid; gap: var(--e3); max-width: 66ch; }
+.passos li { counter-increment: p; position: relative; padding: var(--e3) var(--e4) var(--e3) 72px; background: var(--branco); border: var(--borda); border-radius: var(--r2); }
+.passos li::before {
+  content: counter(p); position: absolute; left: var(--e4); top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; display: grid; place-items: center;
+  background: var(--rosa); border: var(--borda); border-radius: 50%; font: 800 1.25rem var(--titulo);
+}
+.armadilhas { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--e3); max-width: 66ch; }
+.armadilhas li { padding: var(--e3) var(--e4); background: #fff3c4; border: var(--borda); border-radius: var(--r1); }
+.tabela-rol { overflow-x: auto; border: var(--borda); border-radius: var(--r2); background: var(--branco); }
+.tabela { width: 100%; border-collapse: collapse; }
+.tabela th { text-align: left; padding: var(--e3) var(--e4); background: var(--amarelo); border-bottom: var(--borda); }
+.tabela td { padding: var(--e3) var(--e4); border-bottom: 2px solid var(--papel); vertical-align: top; }
+.tabela tr:last-child td { border-bottom: 0; }
+.familias { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--e4); margin-top: var(--e4); }
+.familia { padding: var(--e4); border: var(--borda); border-radius: var(--r2); box-shadow: 0 4px 0 var(--ink); }
+.familia h4 { margin: 0 0 var(--e2); font: 800 1.25rem/1.2 var(--titulo); }
+.familia ul { margin: 0; padding-left: var(--e5); display: grid; gap: var(--e1); }
+.f1 { background: #dff4ff; } .f2 { background: #fff3c4; } .f3 { background: #ffe0d6; } .f4 { background: #dff5d0; } .f5 { background: #ece3ff; }
+.credito { margin-top: var(--e6); font-size: .9375rem; max-width: 66ch; }
+
+@media (max-width: 760px) {
+  .topo { flex-wrap: wrap; gap: var(--e3); }
+  .nav { order: 3; width: 100%; }
+  .nav button { flex: 1; padding: 0 var(--e3); }
+  .anatomia { grid-template-columns: 1fr; }
+  .topico summary { padding: var(--e3) var(--e4); gap: var(--e3); }
+  .topico .corpo { padding: var(--e4); }
+  .lista-def { grid-template-columns: 1fr; }
+  .lista-def dt { justify-self: start; }
+  .atalhos { justify-content: center; }
+}
+
+.pagina .lead { margin-inline: 0; }
+body:has(.pagina.ativa) .cenario { opacity: .3; }
