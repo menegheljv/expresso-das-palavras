@@ -335,3 +335,18 @@ main:has(#inicio.ativa) { align-items: flex-start; padding-top: 0; }
 .f1, .f2, .f3, .f4, .f5 { background: #258549; color: var(--branco); }
 .familia h4, .familia li { color: var(--branco); }
 .familia li::marker { color: var(--branco); }
+
+/* ===== Início: bloco do título centralizado, um pouco afastado da borda; jacupemba livre abaixo dele ===== */
+#inicio.ativa { animation: revert; }
+@media (min-width: 761px) {
+  #inicio.ativa { grid-template-columns: max-content minmax(0, 1fr); }
+  #inicio .inicio-esq { justify-items: center; text-align: center; margin-left: clamp(16px, 8vw, 150px); }
+  #inicio .inicio-esq .mascote-grande { width: min(300px, 34vh); max-width: none; }
+}
+
+/* ===== Jacupemba colada ao título ===== */
+@media (min-width: 761px) {
+  #inicio .inicio-esq { gap: 0; }
+  #inicio .inicio-esq .etiqueta { margin-bottom: var(--e3); }
+  #inicio .inicio-esq .mascote-grande { margin-top: -18px; }
+}
