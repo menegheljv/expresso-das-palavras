@@ -92,6 +92,7 @@
 </svg>
 </div>
 <canvas id="confete" aria-hidden="true"></canvas>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-label="Imagem ampliada"><button type="button" class="lb-fechar" id="lb-fechar">Fechar</button><img id="lb-img" alt=""></div>
 
 <header class="topo">
   <span class="marca">Expresso das Palavras</span>
@@ -113,12 +114,8 @@
     <div class="inicio-texto">
       <p class="etiqueta">Estação Ibitiruí · 9º ano</p>
       <h1 id="t-inicio">Expresso das Palavras</h1>
-      <p class="lead">Embarque com a jacupemba, responda dez questões de Português e chegue à última estação com o maior número de pontos.</p>
-      <button class="btn-grande" id="btn-comecar" type="button">Partir da estação</button>
-      <div class="atalhos">
-        <button class="btn-sec" type="button" data-ir="materia">Estudar a matéria</button>
-        <button class="btn-sec" type="button" data-ir="prova">Entender a prova</button>
-      </div>
+      <p class="lead">Embarque com a jacupemba por três estações, da mais fácil à mais difícil. Cada uma tem dez vagões, um para cada pergunta de Português.</p>
+      <div class="estacoes" id="estacoes"></div>
       <p class="dica">No teclado, use as letras <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd>.</p>
       <p class="recorde" id="recorde" hidden></p>
     </div>
@@ -127,7 +124,7 @@
   <!-- JOGO -->
   <section class="tela" id="jogo" aria-label="Jogo">
     <div class="placar" role="status" aria-live="polite">
-      <div class="caso"><span id="caso-n">Estação 1 de 10</span><div class="progresso"><i id="progresso"></i></div></div>
+      <div class="caso"><span id="caso-n">Pergunta 1 de 10</span><div class="trem-prog" id="trem-prog" aria-hidden="true"></div></div>
       <div class="chip"><small>Pontos</small><b id="pontos">0</b></div>
       <div class="chip combo" id="chip-combo"><small>Combo</small><b id="combo">x0</b></div>
     </div>
@@ -137,13 +134,14 @@
       <article class="cartao" id="cartao">
         <div class="tempo" aria-hidden="true"><i id="barra"></i><span id="tempo-txt">30</span></div>
         <p class="fonte" id="fonte"></p>
+        <button class="figura" id="figura" type="button" hidden aria-label="Ampliar a imagem"><img id="figura-img" alt=""></button>
         <blockquote class="trecho" id="trecho"></blockquote>
         <h2 class="pergunta" id="pergunta"></h2>
         <div class="alts" id="alts" role="group" aria-labelledby="pergunta"></div>
         <div class="retorno" id="retorno" hidden>
           <p class="retorno-titulo" id="retorno-titulo"></p>
           <p class="retorno-texto" id="retorno-texto"></p>
-          <button class="btn-grande btn-prox" id="btn-prox" type="button">Próxima estação</button>
+          <button class="btn-grande btn-prox" id="btn-prox" type="button">Próxima pergunta</button>
         </div>
       </article>
     </div>
@@ -166,7 +164,10 @@
         <ul id="revise-lista"></ul>
         <button class="btn-mini" type="button" data-ir="materia">Abrir a matéria</button>
       </div>
-      <button class="btn-grande" id="btn-again" type="button">Jogar de novo</button>
+      <div class="acoes-fim">
+        <button class="btn-grande" id="btn-again" type="button">Jogar de novo</button>
+        <button class="btn-sec" id="btn-outra" type="button" hidden>Ir para a Estação 2</button>
+      </div>
     </div>
   </section>
 
@@ -185,13 +186,14 @@
           <div class="caixa como"><h4>Como cai na prova</h4><p>"Qual é o assunto do texto?", "O tema do texto é", "A ideia defendida pelo autor é".</p></div>
           <div class="caixa exemplo"><h4>Exemplo</h4><p>Na notícia sobre o filtro do TikTok, o tema são os distúrbios de imagem na sociedade atual. A tese é que as redes sociais pioram esses distúrbios.</p></div>
           <div class="caixa dica"><h4>Truque</h4><p>Tema responde "sobre o quê?". Tese responde "o que o autor pensa sobre isso?". Desconfie de alternativa que é só um detalhe: o tema abrange o texto inteiro.</p></div>
+          <button class="btn-mini treinar" type="button" data-cod="D6">Treinar este tema</button>
         </div>
       </details>
 
       <details class="topico" name="mat">
         <summary><span class="num">2</span><span class="tt">Argumentos</span><span class="cod">D8</span></summary>
         <div class="corpo">
-          <p class="resumo">Argumento é a razão que sustenta a tese. Os tipos mais cobrados são: <strong>autoridade</strong> (fala de especialista), <strong>exemplificação</strong> (um caso concreto), <strong>comparação</strong>, <strong>causa e consequência</strong>, <strong>alusão histórica</strong> (referência ao passado) e <strong>dados</strong> (números e pesquisas).</p>
+          <p class="resumo">Argumento é a razão que sustenta a tese. Os tipos mais cobrados são: <strong>autoridade</strong> (fala de especialista), <strong>exemplificação</strong> (um caso concreto), <strong>comparação</strong>, <strong>causa e consequência</strong>, <strong>alusão histórica</strong> (referência ao passado), <strong>senso comum</strong> (ideia que quase todo mundo aceita sem precisar de prova) e <strong>dados</strong> (números e pesquisas).</p>
           <div class="caixa como"><h4>Como cai na prova</h4><p>"O trecho é um tipo de argumento de", "Qual argumento sustenta a tese?".</p></div>
           <div class="caixa exemplo"><h4>Exemplo</h4><p>A fala de uma cirurgiã plástica sobre os pacientes que chegam ao consultório é argumento de autoridade. Já "o Carnaval, o Réveillon e o Rock in Rio motivam os turistas" é exemplificação.</p></div>
           <div class="caixa dica"><h4>Truque</h4><p>Veja quem está falando. Médico, professor, pesquisador ou instituição quer dizer autoridade. Nome de evento ou caso real quer dizer exemplo.</p></div>
@@ -237,6 +239,7 @@
             <dt>Metáfora</dt><dd>comparação sem o "como": "o turismo é a alavanca".</dd>
             <dt>Prosopopeia</dt><dd>ações humanas dadas a seres que não são humanos: "o vento sussurrava".</dd>
             <dt>Eufemismo</dt><dd>suavizar algo duro: "ele nos deixou", no lugar de "morreu".</dd>
+            <dt>Diminutivo</dt><dd>pode mostrar afetividade, tamanho pequeno ou até ironia. O contexto diz qual.</dd>
             <dt>Sentido figurado</dt><dd>a palavra não vale pelo sentido do dicionário, e sim pela ideia que sugere.</dd>
           </dl>
           <div class="caixa como"><h4>Como cai na prova</h4><p>"O efeito de sentido de", "A expressão sugere", "A figura de linguagem usada é".</p></div>
@@ -332,7 +335,7 @@
             <dt>Necessidade</dt><dd>é necessário, precisa, é preciso.</dd>
             <dt>Possibilidade</dt><dd>talvez, pode ser, possivelmente.</dd>
             <dt>Certeza</dt><dd>com certeza, evidentemente, sem dúvida.</dd>
-            <dt>Apreciação</dt><dd>felizmente, infelizmente, lamentavelmente.</dd>
+            <dt>Apreciação</dt><dd>felizmente, infelizmente, lamentavelmente. Mostram uma avaliação pessoal, ou seja, subjetividade.</dd>
           </dl>
           <div class="caixa como"><h4>Como cai na prova</h4><p>"A expressão destacada é um modalizador de".</p></div>
           <div class="caixa exemplo"><h4>Exemplo</h4><p>"<mark>É necessário</mark> identificar esses distúrbios" é modalizador de necessidade.</p></div>
@@ -354,10 +357,13 @@
             <dt>Poema</dt><dd>expressar emoções com linguagem poética.</dd>
             <dt>Conto</dt><dd>narrar uma história e entreter.</dd>
             <dt>Receita e manual</dt><dd>instruir.</dd>
+            <dt>Fábula</dt><dd>contar uma história curta, com animais, que termina em lição de moral.</dd>
+            <dt>Resenha</dt><dd>apresentar e avaliar uma obra, como um livro ou um filme.</dd>
           </dl>
           <div class="caixa como"><h4>Como cai na prova</h4><p>"A finalidade desse texto é", "O gênero do texto é", "Esse texto foi escrito para".</p></div>
           <div class="caixa exemplo"><h4>Exemplo</h4><p>O anúncio de chocolate quer persuadir o leitor a comprar. A crônica de Tatiana Belinky quer refletir de forma poética e emocionar.</p></div>
           <div class="caixa dica"><h4>Truque</h4><p>Se tem preço, marca ou convite, é propaganda. Se tem fala de especialista e dados, é notícia ou reportagem.</p></div>
+          <button class="btn-mini treinar" type="button" data-cod="D12">Treinar este tema</button>
         </div>
       </details>
 
@@ -489,7 +495,6 @@
   </section>
 </main>
 
-<footer class="rodape">Questões do Preparatório SAEB, 9º ano, 2025&nbsp;(SEDUC).</footer>
 
 <script src="questoes.js"></script>
 <script src="app.js"></script>
