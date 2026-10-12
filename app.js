@@ -7,6 +7,15 @@
   var LETRAS = ['A', 'B', 'C', 'D'];
   var reduzir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (s) { return document.querySelector(s); };
+  var on = function (sel, ev, fn) { var el = $(sel); if (el) el.addEventListener(ev, fn); };
+  function tentar(fn) { try { fn(); } catch (e) { if (window.console) console.error(e); } }
+
+  /* Plano B: se o navegador guardou uma versão antiga do questoes.js, o jogo ainda abre */
+  var ESTACOES_PADRAO = {
+    1: { nome: 'Saída tranquila', sub: 'Tema, gênero e linguagem do dia a dia', nivel: 1, rotulo: 'Fácil' },
+    2: { nome: 'Serra acima', sub: 'Sentido das palavras, coesão e causa', nivel: 2, rotulo: 'Médio' },
+    3: { nome: 'Fim da linha', sub: 'Opinião, argumentos, figuras e poemas', nivel: 3, rotulo: 'Difícil' }
+  };
 
   /* ---------- Armazenamento (pode falhar em janela privada) ---------- */
   function ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
@@ -167,7 +176,7 @@
     var box = $('#estacoes');
     box.innerHTML = '';
     for (var n = 1; n <= ESTACOES_N; n++) {
-      var e = window.ESTACOES[n];
+      var e = (window.ESTACOES && window.ESTACOES[n]) || ESTACOES_PADRAO[n];
       var b = document.createElement('button');
       b.type = 'button'; b.className = 'estacao e' + n; b.setAttribute('data-est', n);
       var bolas = '';
@@ -233,6 +242,8 @@
 
   function novoJogo(cod, est) {
     var base = window.QUESTOES.filter(function (q) { return (!cod || q.d.cod === cod) && (!est || q.est === est); });
+    /* Plano B: com um questoes.js antigo (sem estações), usa todas as questões */
+    if (!base.length) base = window.QUESTOES.filter(function (q) { return !cod || q.d.cod === cod; });
     if (!base.length) return;
     var pool = embaralhar(base).slice(0, TOTAL).map(function (q) {
       var alts = embaralhar(q.alts.map(function (t, i) { return { t: t, ok: i === q.certa }; }));
@@ -414,50 +425,58 @@
 
   /* ---------- Eventos ---------- */
   document.addEventListener('DOMContentLoaded', function () {
-    montarMascotes();
-    document.querySelectorAll('.pagina p, .pagina li, .pagina dd, .pagina h3, .pagina h4, .pagina small, .lead, .dica').forEach(function (el) {
-      var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), ultimo = null, n;
-      while ((n = w.nextNode())) { if (n.textContent.trim()) ultimo = n; }
-      if (ultimo) ultimo.textContent = ultimo.textContent.replace(/ ([^ ]+)(\s*)$/, ' $1$2');
-    });
-    montarFundo();
-    atualizarBotaoSom();
-    mostrarRecorde();
-    humor($('#inicio'), 'feliz');
-
+    /* Primeiro os botões, para nada travar se uma etapa de montagem falhar */
     document.querySelectorAll('[data-ir]').forEach(function (b) {
-      b.addEventListener('click', function () { somClique(); mostrar(b.getAttribute('data-ir')); });
+      b.addEventListener('click', function () { tentar(function () { somClique(); mostrar(b.getAttribute('data-ir')); }); });
     });
     document.querySelectorAll('.treinar').forEach(function (b) {
-      b.addEventListener('click', function () { somClique(); novoJogo(b.getAttribute('data-cod')); });
+      b.addEventListener('click', function () { tentar(function () { somClique(); novoJogo(b.getAttribute('data-cod')); }); });
     });
-    $('#btn-again').addEventListener('click', function () { somClique(); novoJogo(st.cod, st.est); });
-    $('#btn-outra').addEventListener('click', function () {
-      somClique();
-      var n = parseInt(this.getAttribute('data-est'), 10);
-      if (n) novoJogo(null, n); else { mostrar('inicio'); }
+    on('#btn-again', 'click', function () { tentar(function () { somClique(); novoJogo(st.cod, st.est); }); });
+    on('#btn-outra', 'click', function () {
+      tentar(function () {
+        somClique();
+        var n = parseInt($('#btn-outra').getAttribute('data-est'), 10);
+        if (n) novoJogo(null, n); else mostrar('inicio');
+      });
     });
-    $('#btn-prox').addEventListener('click', proximo);
-    $('#btn-som').addEventListener('click', function () {
-      mudo = !mudo; gravar('dp-mudo', mudo ? '1' : '0'); atualizarBotaoSom(); somClique();
+    on('#btn-prox', 'click', function () { tentar(proximo); });
+    on('#btn-som', 'click', function () {
+      tentar(function () { mudo = !mudo; gravar('dp-mudo', mudo ? '1' : '0'); atualizarBotaoSom(); somClique(); });
     });
-    $('#figura').addEventListener('click', abrirImagem);
-    $('#lightbox').addEventListener('click', fecharImagem);
+    on('#figura', 'click', function () { tentar(abrirImagem); });
+    on('#lightbox', 'click', function () { tentar(fecharImagem); });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { fecharImagem(); return; }
-      if (e.ctrlKey || e.metaKey || e.altKey) return;
-      if (!$('#jogo').classList.contains('ativa') || !st || !$('#lightbox').hidden) return;
-      var k = e.key.toLowerCase();
-      var idx = 'abcd'.indexOf(k);
-      if (idx < 0 && /^[1-4]$/.test(k)) idx = parseInt(k, 10) - 1;
-      if (idx >= 0 && !st.trava) { e.preventDefault(); responder(idx); return; }
-      if ((e.key === 'Enter' || e.key === ' ') && st.trava && document.activeElement.tagName !== 'BUTTON') {
-        e.preventDefault(); proximo();
-      }
+      tentar(function () {
+        if (e.key === 'Escape') { fecharImagem(); return; }
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        if (!$('#jogo').classList.contains('ativa') || !st || !$('#lightbox').hidden) return;
+        var k = e.key.toLowerCase();
+        var idx = 'abcd'.indexOf(k);
+        if (idx < 0 && /^[1-4]$/.test(k)) idx = parseInt(k, 10) - 1;
+        if (idx >= 0 && !st.trava) { e.preventDefault(); responder(idx); return; }
+        if ((e.key === 'Enter' || e.key === ' ') && st.trava && document.activeElement.tagName !== 'BUTTON') {
+          e.preventDefault(); proximo();
+        }
+      });
     });
     window.addEventListener('resize', function () {
-      var c = $('#confete'); c.width = window.innerWidth; c.height = window.innerHeight;
+      var c = $('#confete'); if (c) { c.width = window.innerWidth; c.height = window.innerHeight; }
     });
+
+    /* Depois a montagem da tela, cada etapa isolada */
+    tentar(montarMascotes);
+    tentar(function () {
+      document.querySelectorAll('.pagina p, .pagina li, .pagina dd, .pagina h3, .pagina h4, .pagina small, .lead, .dica').forEach(function (el) {
+        var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), ultimo = null, n;
+        while ((n = w.nextNode())) { if (n.textContent.trim()) ultimo = n; }
+        if (ultimo) ultimo.textContent = ultimo.textContent.replace(/ ([^ ]+)(\s*)$/, ' $1$2');
+      });
+    });
+    tentar(montarFundo);
+    tentar(atualizarBotaoSom);
+    tentar(mostrarRecorde);
+    tentar(function () { humor($('#inicio'), 'feliz'); });
   });
 })();
