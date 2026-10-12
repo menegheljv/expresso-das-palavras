@@ -71,6 +71,15 @@
     g.style.animation = 'none'; void g.getBoundingClientRect(); g.style.animation = '';
   }
 
+  /* ---------- Cenário: cabe inteiro em telas largas, preenche em telas estreitas ---------- */
+  function ajustarCenario() {
+    var svg = $('.cenario svg');
+    if (!svg) return;
+    var h = svg.getBoundingClientRect().height;
+    var cortaria = (h / 260) < (window.innerWidth / 1440);
+    svg.setAttribute('preserveAspectRatio', cortaria ? 'xMidYMax meet' : 'xMidYMax slice');
+  }
+
   /* ---------- Fundo com letras flutuando ---------- */
   function montarFundo() {
     if (reduzir) return;
@@ -463,6 +472,7 @@
     });
     window.addEventListener('resize', function () {
       var c = $('#confete'); if (c) { c.width = window.innerWidth; c.height = window.innerHeight; }
+      tentar(ajustarCenario);
     });
 
     /* Depois a montagem da tela, cada etapa isolada */
@@ -475,6 +485,7 @@
       });
     });
     tentar(montarFundo);
+    tentar(ajustarCenario);
     tentar(atualizarBotaoSom);
     tentar(mostrarRecorde);
     tentar(function () { humor($('#inicio'), 'feliz'); });

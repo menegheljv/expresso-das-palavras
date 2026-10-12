@@ -218,3 +218,68 @@ body:has(.pagina.ativa) .cenario { opacity: .3; }
   .estacao { grid-template-columns: 1fr; }
   .estacao .e-meta, .estacao .e-rec { grid-row: auto; grid-column: 1; }
 }
+
+/* ===== Título acima da jacupemba ===== */
+#inicio.ativa { grid-template-columns: minmax(280px, 400px) minmax(0, 560px); justify-content: center; }
+.inicio-esq { display: grid; justify-items: center; text-align: center; gap: var(--e3); }
+.inicio-esq .etiqueta { margin: 0; }
+#inicio h1 { margin: 0; font-size: clamp(2.25rem, min(4.2vw, 7vh), 3.5rem); text-wrap: balance; }
+#inicio .inicio-esq .mascote-grande { width: min(100%, 300px, 34vh); margin-top: var(--e2); }
+@media (max-width: 760px) {
+  #inicio.ativa { grid-template-columns: 1fr; }
+  #inicio h1 { font-size: clamp(2.25rem, 11vw, 3rem); }
+  #inicio .inicio-esq .mascote-grande { width: min(60%, 200px); }
+}
+
+/* ===== Cenário inteiro, sem corte ===== */
+:root { --alt-cenario: clamp(130px, min(18vw, 34vh), 360px); }
+.cenario {
+  background:
+    linear-gradient(to top, transparent 0 2.3%, #14301f 2.3% 3.5%, transparent 3.5% 5.4%, #14301f 5.4% 6.6%, transparent 6.6%),
+    linear-gradient(to top, #8fd16a 0 10.8%, #bfe3a0 10.8% 27%, #d5ecbf 27% 45%, transparent 45%);
+}
+
+/* ===== Frase e estações mais acima; frase em duas linhas ===== */
+#inicio.ativa { grid-template-columns: minmax(280px, 400px) minmax(0, 640px); align-items: start; }
+#inicio .inicio-texto { padding-top: var(--e3); }
+#inicio .inicio-texto .lead { max-width: none; font-size: clamp(.95rem, 1.15vw, 1.0625rem); margin-bottom: var(--e4); text-wrap: balance; }
+.estacoes { max-width: 640px; }
+@media (max-width: 760px) {
+  #inicio.ativa { grid-template-columns: 1fr; align-items: center; }
+  #inicio .inicio-texto { padding-top: 0; }
+  #inicio .inicio-texto .lead { font-size: 1.0625rem; }
+}
+
+/* ===== Celular: cabeçalho compacto, estações logo à vista ===== */
+@media (max-width: 760px) {
+  .topo { padding: var(--e3) var(--e4); gap: var(--e2); }
+  .marca { flex: 1; min-width: 0; font-size: 1.0625rem; }
+  .som { padding: 0 var(--e3); }
+  #som-txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .nav button { font-size: .9375rem; padding: 0 var(--e2); }
+  main { padding-top: var(--e2); }
+  #inicio.ativa { gap: var(--e4); }
+  .inicio-esq { gap: var(--e2); }
+  #inicio .inicio-esq .mascote-grande { width: min(40%, 150px); margin-top: 0; }
+  #inicio h1 { font-size: clamp(2rem, 9.5vw, 2.5rem); }
+  .etiqueta { font-size: .75rem; }
+  .estacao .e-meta { gap: var(--e3); }
+}
+
+/* ===== Celular: tela do jogo compacta ===== */
+@media (max-width: 760px) {
+  .placar { grid-template-columns: 1fr 1fr; gap: var(--e2) var(--e3); margin-bottom: var(--e2); }
+  .placar .caso { grid-column: 1 / -1; padding-right: 0; }
+  .placar .chip, .placar .chip.combo { grid-column: auto; min-width: 0; display: flex; justify-content: space-between; align-items: center; gap: var(--e2); padding: 2px var(--e4); border-radius: var(--r3); }
+  .placar .chip b { font-size: 1.375rem; }
+  .mascote-lateral { width: 64px; margin-bottom: -28px; }
+  .cartao { padding-top: var(--e6); }
+  .figura img { max-height: 200px; }
+  .retorno { padding: var(--e3) var(--e4); }
+}
+
+/* ===== Toque: botões confortáveis e sem atraso ===== */
+button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+@media (max-width: 760px) {
+  .btn-mini, .btn-sec, .btn-prox, .btn-grande { min-height: 48px; }
+}
