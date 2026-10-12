@@ -309,3 +309,29 @@ main:has(#inicio.ativa) { align-items: flex-start; padding-top: 0; }
 
 /* A tela inicial não anima a entrada: a jacupemba é fixa no cenário e precisa de referência estável */
 #inicio.ativa { animation: none; }
+
+/* ===== Selo e título encostados à esquerda (computador) ===== */
+@media (min-width: 761px) {
+  main:has(#inicio.ativa) { padding-left: var(--e4); }
+  #inicio.ativa { margin-left: 0; grid-template-columns: minmax(260px, 320px) minmax(0, 640px); }
+  #inicio .inicio-esq { justify-items: start; text-align: left; }
+}
+
+@media (min-width: 761px) {
+  #inicio.ativa { max-width: none; width: 100%; grid-template-columns: 320px minmax(0, 1fr); }
+  #inicio .inicio-texto { justify-self: center; width: min(640px, 100%); }
+}
+
+/* ===== Jogar / Matéria / A prova acima das estações (computador) ===== */
+.nav-inicio { justify-content: center; margin-bottom: var(--e4); }
+@media (min-width: 761px) {
+  body:has(#inicio.ativa) .topo .nav { display: none; }
+}
+@media (max-width: 760px) {
+  .nav-inicio { display: none; }
+}
+
+/* ===== Cartões das habilidades: todos verdes, letra branca ===== */
+.f1, .f2, .f3, .f4, .f5 { background: #258549; color: var(--branco); }
+.familia h4, .familia li { color: var(--branco); }
+.familia li::marker { color: var(--branco); }
