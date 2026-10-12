@@ -3,6 +3,7 @@
 
   var TOTAL = 10;
   var TEMPO = 30;
+  var ESTACOES_N = 3;
   var LETRAS = ['A', 'B', 'C', 'D'];
   var reduzir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (s) { return document.querySelector(s); };
@@ -11,7 +12,11 @@
   function ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function gravar(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* sem armazenamento */ } }
 
-  /* ---------- Mascote: uma lupa detetive ---------- */
+  /* ---------- Texto sem viúva: liga as duas últimas palavras ---------- */
+  function sv(t) { return t.replace(/ (\S+)$/, ' $1'); }
+  function sorteia(a) { return a[Math.floor(Math.random() * a.length)]; }
+
+  /* ---------- Mascote: a jacupemba ---------- */
   var PINTAS = [[96,160],[118,172],[140,158],[84,140],[108,148],[132,138],[154,146],[100,128],[124,122],[138,112],[132,98],[140,86],[130,80],[118,106],[160,162],[78,162],[104,176],[146,130]];
   function pintas() {
     return PINTAS.map(function (q, i) {
@@ -21,32 +26,24 @@
   var MASCOTE =
     '<svg viewBox="0 0 220 240" data-humor="neutro" role="img" aria-label="Jacupemba, a mascote do jogo">' +
     '<g class="mascote-corpo">' +
-    // cauda
     '<path d="M62 150C40 160 22 180 8 214C36 210 62 196 84 176Z" fill="#2d3138" stroke="#14301f" stroke-width="6" stroke-linejoin="round"/>' +
     '<path d="M58 162C44 174 30 192 20 208" fill="none" stroke="#3e6a55" stroke-width="4" stroke-linecap="round"/>' +
-    // pernas
     '<path d="M96 192L92 226M132 192L136 226" stroke="#14301f" stroke-width="13" stroke-linecap="round"/>' +
     '<path d="M96 192L92 226M132 192L136 226" stroke="#9aa0a9" stroke-width="7" stroke-linecap="round"/>' +
     '<path d="M80 228H98M126 228H146" stroke="#14301f" stroke-width="11" stroke-linecap="round"/>' +
     '<path d="M80 228H98M126 228H146" stroke="#9aa0a9" stroke-width="5" stroke-linecap="round"/>' +
-    // corpo e asa
     '<ellipse cx="112" cy="150" rx="62" ry="48" transform="rotate(-8 112 150)" fill="#2d3138" stroke="#14301f" stroke-width="7"/>' +
     '<path d="M70 140C90 120 140 120 160 150C140 176 92 178 70 140Z" fill="#1f2328" opacity=".6"/>' +
     pintas() +
-    // pescoço
     '<path d="M124 132C134 114 136 92 138 70" fill="none" stroke="#14301f" stroke-width="40" stroke-linecap="round"/>' +
     '<path d="M124 132C134 114 136 92 138 70" fill="none" stroke="#2d3138" stroke-width="28" stroke-linecap="round"/>' +
     '<ellipse cx="132" cy="98" rx="3" ry="4" fill="#f4f1ea"/><ellipse cx="141" cy="110" rx="3" ry="4" fill="#f4f1ea"/><ellipse cx="128" cy="116" rx="3" ry="4" fill="#f4f1ea"/><ellipse cx="140" cy="84" rx="3" ry="4" fill="#f4f1ea"/>' +
-    // cabeça e crista
     '<circle cx="146" cy="52" r="28" fill="#3a3f47" stroke="#14301f" stroke-width="7"/>' +
     '<path d="M126 36q8-14 20-16M138 30q6-12 18-12M150 28q6-8 14-6" fill="none" stroke="#aeb4bd" stroke-width="5" stroke-linecap="round"/>' +
-    // barbela vermelha
     '<path d="M162 76C176 76 180 94 172 108C164 112 156 100 158 86Z" fill="#e63b3b" stroke="#14301f" stroke-width="5" stroke-linejoin="round"/>' +
-    // bico
     '<g class="boca boca-neutro"><path d="M172 42Q198 42 206 60Q190 60 172 56Z" fill="#2b2d33" stroke="#14301f" stroke-width="5" stroke-linejoin="round"/><path d="M174 58Q190 62 204 62" fill="none" stroke="#14301f" stroke-width="4" stroke-linecap="round"/></g>' +
     '<g class="boca boca-feliz"><path d="M172 38Q198 34 208 50Q190 52 172 50Z" fill="#2b2d33" stroke="#14301f" stroke-width="5" stroke-linejoin="round"/><path d="M174 52Q192 54 206 52Q198 68 176 62Z" fill="#ff7a8a" stroke="#14301f" stroke-width="4" stroke-linejoin="round"/><path d="M176 62Q192 74 204 74Q196 62 176 62Z" fill="#2b2d33" stroke="#14301f" stroke-width="4" stroke-linejoin="round"/></g>' +
     '<g class="boca boca-triste"><path d="M172 44Q196 46 204 62Q188 60 172 58Z" fill="#2b2d33" stroke="#14301f" stroke-width="5" stroke-linejoin="round"/><path d="M176 66Q188 62 198 70" fill="none" stroke="#14301f" stroke-width="4" stroke-linecap="round"/></g>' +
-    // olho
     '<g class="olhos"><circle cx="156" cy="48" r="10" fill="#fff" stroke="#14301f" stroke-width="4"/><circle cx="158" cy="49" r="6" fill="#d9342b"/><circle cx="159" cy="49" r="3" fill="#14301f"/><circle cx="160" cy="46" r="1.6" fill="#fff"/></g>' +
     '<path class="cenho" d="M144 34L168 40" stroke="#14301f" stroke-width="5" stroke-linecap="round"/>' +
     '<g class="brilho"><path d="M30 70l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#ffd23f" stroke="#14301f" stroke-width="3"/><path d="M192 112l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#ff7a59" stroke="#14301f" stroke-width="3"/></g>' +
@@ -61,7 +58,6 @@
     var svg = (onde || document).querySelector('svg');
     if (!svg) return;
     svg.setAttribute('data-humor', h);
-    // reinicia as animações do mascote
     var g = svg.querySelector('.mascote-corpo');
     g.style.animation = 'none'; void g.getBoundingClientRect(); g.style.animation = '';
   }
@@ -156,6 +152,61 @@
     else { confeteRodando = false; g.clearRect(0, 0, c.width, c.height); }
   }
 
+  /* ---------- Recorde e cartões das estações ---------- */
+  function melhorDe(n) { return parseInt(ler('dp-rec-' + n) || '0', 10); }
+
+  function mostrarRecorde() {
+    var rec = 0;
+    for (var n = 1; n <= ESTACOES_N; n++) rec = Math.max(rec, melhorDe(n));
+    var el = $('#recorde');
+    if (rec > 0) { el.hidden = false; el.textContent = 'Seu recorde: ' + rec + ' pontos'; }
+    montarEstacoes();
+  }
+
+  function montarEstacoes() {
+    var box = $('#estacoes');
+    box.innerHTML = '';
+    for (var n = 1; n <= ESTACOES_N; n++) {
+      var e = window.ESTACOES[n];
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'estacao e' + n; b.setAttribute('data-est', n);
+      var bolas = '';
+      for (var k = 1; k <= ESTACOES_N; k++) bolas += '<i class="' + (k <= e.nivel ? 'cheia' : '') + '"></i>';
+      var rec = melhorDe(n);
+      b.innerHTML = '<span class="e-num">Estação ' + n + '</span>' +
+        '<span class="e-tit"></span><span class="e-sub"></span>' +
+        '<span class="e-meta"><span class="nivel" role="img" aria-label="Dificuldade ' + e.nivel + ' de ' + ESTACOES_N + '">' + bolas + '</span><span class="e-rot"></span></span>' +
+        '<span class="e-rec"></span>';
+      b.querySelector('.e-tit').textContent = e.nome;
+      b.querySelector('.e-sub').textContent = sv(e.sub);
+      b.querySelector('.e-rot').textContent = e.rotulo + ' · 10 vagões';
+      b.querySelector('.e-rec').textContent = rec ? 'Recorde: ' + rec : 'Ainda sem recorde';
+      b.addEventListener('click', function () { somClique(); novoJogo(null, parseInt(this.getAttribute('data-est'), 10)); });
+      box.appendChild(b);
+    }
+  }
+
+  /* ---------- Trem de vagões (progresso) ---------- */
+  function montarTrem(n) {
+    var t = $('#trem-prog');
+    t.innerHTML = '<span class="loco"></span>';
+    for (var i = 0; i < n; i++) t.insertAdjacentHTML('beforeend', '<span class="vagao"></span>');
+  }
+  function atualizarTrem() {
+    document.querySelectorAll('#trem-prog .vagao').forEach(function (v, i) {
+      v.className = 'vagao' + (st.resultado[i] === 'ok' ? ' ok' : st.resultado[i] === 'erro' ? ' erro' : '') + (i === st.i ? ' atual' : '');
+    });
+  }
+
+  /* ---------- Imagem ampliada ---------- */
+  function abrirImagem() {
+    var src = $('#figura-img');
+    $('#lb-img').src = src.src; $('#lb-img').alt = src.alt;
+    $('#lightbox').hidden = false;
+    $('#lb-fechar').focus();
+  }
+  function fecharImagem() { $('#lightbox').hidden = true; }
+
   /* ---------- Jogo ---------- */
   var st = null;
 
@@ -180,14 +231,16 @@
     window.scrollTo(0, 0);
   }
 
-  function novoJogo(cod) {
-    var base = window.QUESTOES.filter(function (q) { return !cod || q.d.cod === cod; });
+  function novoJogo(cod, est) {
+    var base = window.QUESTOES.filter(function (q) { return (!cod || q.d.cod === cod) && (!est || q.est === est); });
+    if (!base.length) return;
     var pool = embaralhar(base).slice(0, TOTAL).map(function (q) {
       var alts = embaralhar(q.alts.map(function (t, i) { return { t: t, ok: i === q.certa }; }));
-      return { fonte: q.fonte, trecho: q.trecho, pergunta: q.pergunta, d: q.d, alts: alts };
+      return { fonte: q.fonte, trecho: q.trecho || '', img: q.img || '', alt: q.alt || '', pergunta: q.pergunta, d: q.d, alts: alts };
     });
-    st = { pool: pool, i: 0, pontos: 0, combo: 0, melhor: 0, acertos: 0, erros: [], trava: false, t0: 0, raf: 0 };
+    st = { pool: pool, cod: cod || null, est: est || 0, i: 0, pontos: 0, combo: 0, melhor: 0, acertos: 0, erros: [], resultado: [], trava: false, t0: 0, raf: 0 };
     $('#pontos').textContent = '0';
+    montarTrem(pool.length);
     mostrar('jogo');
     renderCaso();
   }
@@ -195,10 +248,18 @@
   function renderCaso() {
     var q = st.pool[st.i];
     st.trava = false;
-    $('#caso-n').textContent = 'Estação ' + (st.i + 1) + ' de ' + st.pool.length;
-    $('#progresso').style.width = (st.i / st.pool.length * 100) + '%';
+    $('#caso-n').textContent = (st.est ? 'Estação ' + st.est + ' · ' : 'Treino · ') + 'pergunta ' + (st.i + 1) + ' de ' + st.pool.length;
+    atualizarTrem();
     $('#fonte').textContent = q.fonte;
-    $('#trecho').innerHTML = q.trecho.replace(/ ([^ <>]+)$/, ' $1');
+
+    var tr = $('#trecho');
+    tr.hidden = !q.trecho;
+    tr.innerHTML = q.trecho.replace(/ ([^ <>]+)$/, ' $1');
+
+    var fig = $('#figura');
+    fig.hidden = !q.img;
+    if (q.img) { $('#figura-img').src = 'img/' + q.img; $('#figura-img').alt = q.alt; }
+
     $('#pergunta').textContent = sv(q.pergunta);
     $('#retorno').hidden = true;
     atualizarCombo();
@@ -243,10 +304,14 @@
   }
   function pop(el) { el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
 
-  var ELOGIOS = ['Boa, maquinista!', 'Estação alcançada!', 'Olho de lince!', 'Mandou bem!', 'Na mosca!'];
-  var CONSOLOS = ['Quase! O trem segue viagem.', 'Essa foi esperta.', 'Sem problema, a próxima estação é sua!'];
-  function sv(t) { return t.replace(/ (\S+)$/, ' $1'); }
-  function sorteia(a) { return a[Math.floor(Math.random() * a.length)]; }
+  var ELOGIOS = ['Boa, maquinista!', 'Parada certa!', 'Olho de lince!', 'Mandou bem!', 'Na mosca!'];
+  var ENGANOS = [
+    'Foi engano! E olha que Ibitiruí já se chamou Engano.',
+    'Engano seu? Por aqui isso é tradição, o nome da estação já foi esse.',
+    'Desceu na estação errada: Engano! Mas calma, a próxima pergunta é sua.',
+    'Ninguém erra sozinho. Ibitiruí também já foi Engano e deu no que deu.',
+    'Errou? Foi só um engano. Dizem que Ibitiruí começou assim.'
+  ];
 
   function responder(idx) {
     if (st.trava) return;
@@ -255,9 +320,8 @@
     var q = st.pool[st.i];
     var r = restante();
     var acertou = idx >= 0 && q.alts[idx].ok;
-    var botoes = document.querySelectorAll('#alts .alt');
 
-    botoes.forEach(function (b, i) {
+    document.querySelectorAll('#alts .alt').forEach(function (b, i) {
       b.disabled = true;
       if (q.alts[i].ok) b.classList.add('certa');
       else if (i === idx) b.classList.add('errada');
@@ -278,17 +342,18 @@
     } else {
       st.combo = 0;
       st.erros.push(q.d);
-      tit = idx < 0 ? 'O tempo acabou!' : sorteia(CONSOLOS);
-      txt = 'A resposta certa está em verde.';
+      tit = idx < 0 ? 'Tempo esgotado! Foi engano.' : 'Engano!';
+      txt = sorteia(ENGANOS) + ' A resposta certa está em verde.';
       humor($('#mascote-jogo'), 'triste');
       somErro();
     }
+    st.resultado[st.i] = acertou ? 'ok' : 'erro';
+    atualizarTrem();
     atualizarCombo(); pop($('#combo'));
-    $('#progresso').style.width = ((st.i + 1) / st.pool.length * 100) + '%';
 
     $('#retorno-titulo').textContent = tit;
     $('#retorno-texto').textContent = sv(txt + ' Habilidade ' + q.d.cod + ': ' + q.d.txt);
-    $('#btn-prox').textContent = st.i === st.pool.length - 1 ? 'Ver o resultado' : 'Próxima estação';
+    $('#btn-prox').textContent = st.i === st.pool.length - 1 ? 'Ver o resultado' : 'Próxima pergunta';
     $('#retorno').hidden = false;
     $('#btn-prox').focus({ preventScroll: true });
     $('#retorno').scrollIntoView({ block: 'nearest', behavior: reduzir ? 'auto' : 'smooth' });
@@ -303,10 +368,10 @@
   }
 
   var PATENTES = [
-    { min: 10, nome: 'Chefe da Estação', msg: 'Gabaritou! Nenhuma estação passou despercebida.' },
+    { min: 10, nome: 'Chefe da Estação', msg: 'Gabaritou! Nenhuma parada passou despercebida.' },
     { min: 7, nome: 'Maquinista de Respeito', msg: 'Você chegou quase sempre na hora certa. Falta pouco pra virar chefe da estação.' },
     { min: 4, nome: 'Maquinista em Treino', msg: 'Bom começo. Com mais um pouco de prática, você chega lá.' },
-    { min: 0, nome: 'Passageiro Curioso', msg: 'Todo grande maquinista começou olhando da janela. Embarque de novo!' }
+    { min: 0, nome: 'Passageiro Curioso', msg: 'Desceu na estação Engano! Mas Ibitiruí já se chamou assim, então você está em casa. Embarque de novo!' }
   ];
 
   function fim() {
@@ -331,20 +396,20 @@
     });
     $('#revise').hidden = !st.erros.length;
 
-    var rec = parseInt(ler('dp-recorde') || '0', 10);
-    if (st.pontos > rec) { gravar('dp-recorde', String(st.pontos)); }
+    if (st.est) {
+      var chave = 'dp-rec-' + st.est;
+      if (st.pontos > melhorDe(st.est)) gravar(chave, String(st.pontos));
+    }
+    var outra = $('#btn-outra');
+    outra.hidden = false;
+    if (st.est && st.est < ESTACOES_N) { outra.textContent = 'Ir para a Estação ' + (st.est + 1); outra.setAttribute('data-est', st.est + 1); }
+    else { outra.textContent = 'Voltar às estações'; outra.setAttribute('data-est', '0'); }
 
     mostrar('fim');
     humor($('#mascote-fim'), st.acertos >= 7 ? 'feliz' : st.acertos >= 4 ? 'neutro' : 'triste');
     somFim();
     if (st.acertos >= 7) { confete(180, 0.35); setTimeout(function () { confete(140, 0.5); }, 600); }
     mostrarRecorde();
-  }
-
-  function mostrarRecorde() {
-    var rec = parseInt(ler('dp-recorde') || '0', 10);
-    var el = $('#recorde');
-    if (rec > 0) { el.hidden = false; el.textContent = 'Seu recorde: ' + rec + ' pontos'; }
   }
 
   /* ---------- Eventos ---------- */
@@ -360,22 +425,29 @@
     mostrarRecorde();
     humor($('#inicio'), 'feliz');
 
-    $('#btn-comecar').addEventListener('click', function () { somClique(); novoJogo(); });
     document.querySelectorAll('[data-ir]').forEach(function (b) {
       b.addEventListener('click', function () { somClique(); mostrar(b.getAttribute('data-ir')); });
     });
     document.querySelectorAll('.treinar').forEach(function (b) {
       b.addEventListener('click', function () { somClique(); novoJogo(b.getAttribute('data-cod')); });
     });
-    $('#btn-again').addEventListener('click', function () { somClique(); novoJogo(); });
+    $('#btn-again').addEventListener('click', function () { somClique(); novoJogo(st.cod, st.est); });
+    $('#btn-outra').addEventListener('click', function () {
+      somClique();
+      var n = parseInt(this.getAttribute('data-est'), 10);
+      if (n) novoJogo(null, n); else { mostrar('inicio'); }
+    });
     $('#btn-prox').addEventListener('click', proximo);
     $('#btn-som').addEventListener('click', function () {
       mudo = !mudo; gravar('dp-mudo', mudo ? '1' : '0'); atualizarBotaoSom(); somClique();
     });
+    $('#figura').addEventListener('click', abrirImagem);
+    $('#lightbox').addEventListener('click', fecharImagem);
 
     document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { fecharImagem(); return; }
       if (e.ctrlKey || e.metaKey || e.altKey) return;
-      if (!$('#jogo').classList.contains('ativa') || !st) return;
+      if (!$('#jogo').classList.contains('ativa') || !st || !$('#lightbox').hidden) return;
       var k = e.key.toLowerCase();
       var idx = 'abcd'.indexOf(k);
       if (idx < 0 && /^[1-4]$/.test(k)) idx = parseInt(k, 10) - 1;
