@@ -76,34 +76,6 @@
     if (svg) svg.setAttribute('preserveAspectRatio', 'xMidYMax slice');
   }
 
-  /* ---------- A jacupemba da tela inicial fica em pé no topo da cachoeira ---------- */
-  function posicionarMascote() {
-    var m = $('#inicio .inicio-esq .mascote-grande');
-    var marca = $('#cresta');
-    if (!m || !marca) return;
-    var emFluxo = window.innerWidth <= 760 || !$('#inicio').classList.contains('ativa');
-    if (emFluxo) { m.classList.remove('no-cenario'); m.style.left = m.style.top = m.style.width = ''; return; }
-    /* A cachoeira do cenário vai para baixo do título: a jacupemba fica logo abaixo dele */
-    var svg = $('.cenario svg'), titulo = $('#inicio h1'), cach = $('#cachoeira');
-    if (svg && titulo && cach) {
-      var rs = svg.getBoundingClientRect(), rt = titulo.getBoundingClientRect();
-      var escala = Math.max(rs.width / 2640, rs.height / 260);
-      var esquerda = 720 - rs.width / (2 * escala);
-      var crestaX = esquerda + ((rt.left + rt.right) / 2 - rs.left) / escala;
-      marca.setAttribute('x', crestaX.toFixed(1));
-      cach.setAttribute('transform', 'translate(' + (crestaX - 190).toFixed(1) + ' 0) scale(1 1.12)');
-    }
-    /* tamanho natural vindo do CSS (em fluxo), sem depender de window.innerHeight */
-    m.classList.remove('no-cenario'); m.style.left = m.style.top = m.style.width = '';
-    var larg = m.getBoundingClientRect().width;
-    var alvo = marca.getBoundingClientRect();
-    m.classList.add('no-cenario');
-    m.style.width = larg + 'px';
-    var alt = m.getBoundingClientRect().height;
-    m.style.left = Math.round(alvo.left - larg * 0.5) + 'px';
-    m.style.top = Math.round(alvo.top - alt * 0.95) + 'px';
-  }
-
   /* ---------- Fundo com letras flutuando ---------- */
   function montarFundo() {
     if (reduzir) return;
@@ -271,7 +243,6 @@
       if (b.getAttribute('data-ir') === alvoNav) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
     });
     window.scrollTo(0, 0);
-    tentar(posicionarMascote);
   }
 
   function novoJogo(cod, est) {
@@ -498,8 +469,6 @@
     window.addEventListener('resize', function () {
       var c = $('#confete'); if (c) { c.width = window.innerWidth; c.height = window.innerHeight; }
       tentar(ajustarCenario);
-      tentar(posicionarMascote);
-    tentar(posicionarMascote);
     });
 
     /* Depois a montagem da tela, cada etapa isolada */
@@ -516,19 +485,5 @@
     tentar(atualizarBotaoSom);
     tentar(mostrarRecorde);
     tentar(function () { humor($('#inicio'), 'feliz'); });
-
-    /* A posição da jacupemba depende do layout final: recalcula ao fim da animação de entrada, ao carregar e com as fontes prontas */
-    document.querySelectorAll('.tela').forEach(function (t) {
-      t.addEventListener('animationend', function (e) { if (e.target === t) tentar(posicionarMascote); });
-    });
-    window.addEventListener('load', function () { tentar(posicionarMascote); });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { tentar(posicionarMascote); });
-    setTimeout(function () { tentar(posicionarMascote); }, 700);
-    /* Qualquer mudança de tamanho do cenário ou da página reposiciona a jacupemba */
-    if (window.ResizeObserver) {
-      var ro = new ResizeObserver(function () { tentar(posicionarMascote); });
-      var sv = $('.cenario svg'); if (sv) ro.observe(sv);
-      ro.observe(document.documentElement);
-    }
   });
 })();
