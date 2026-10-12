@@ -83,6 +83,16 @@
     if (!m || !marca) return;
     var emFluxo = window.innerWidth <= 760 || !$('#inicio').classList.contains('ativa');
     if (emFluxo) { m.classList.remove('no-cenario'); m.style.left = m.style.top = m.style.width = ''; return; }
+    /* A cachoeira do cenário vai para baixo do título: a jacupemba fica logo abaixo dele */
+    var svg = $('.cenario svg'), titulo = $('#inicio h1'), cach = $('#cachoeira');
+    if (svg && titulo && cach) {
+      var rs = svg.getBoundingClientRect(), rt = titulo.getBoundingClientRect();
+      var escala = Math.max(rs.width / 2640, rs.height / 260);
+      var esquerda = 720 - rs.width / (2 * escala);
+      var crestaX = esquerda + ((rt.left + rt.right) / 2 - rs.left) / escala;
+      marca.setAttribute('x', crestaX.toFixed(1));
+      cach.setAttribute('transform', 'translate(' + (crestaX - 190).toFixed(1) + ' 0) scale(1 1.12)');
+    }
     /* tamanho natural vindo do CSS (em fluxo), sem depender de window.innerHeight */
     m.classList.remove('no-cenario'); m.style.left = m.style.top = m.style.width = '';
     var larg = m.getBoundingClientRect().width;
