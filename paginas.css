@@ -357,3 +357,8 @@ body:has(#inicio.ativa) .topo .nav { display: flex; }
 @media (min-width: 761px) {
   #inicio .inicio-esq { margin-top: clamp(24px, 7vh, 72px); }
 }
+
+/* ===== Estações mais abaixo (computador) ===== */
+@media (min-width: 761px) {
+  #inicio .inicio-texto { padding-top: clamp(48px, 14vh, 120px); }
+}
