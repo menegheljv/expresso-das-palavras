@@ -101,6 +101,7 @@
     if (mudo) return;
     try {
       ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      if (ctx.state === 'suspended') ctx.resume();
       var t = ctx.currentTime;
       notas.forEach(function (f, k) {
         var o = ctx.createOscillator();
@@ -108,7 +109,7 @@
         o.type = tipo || 'triangle';
         o.frequency.value = f;
         g.gain.setValueAtTime(0.0001, t + k * dur);
-        g.gain.exponentialRampToValueAtTime(vol || 0.16, t + k * dur + 0.02);
+        g.gain.exponentialRampToValueAtTime(vol || 0.22, t + k * dur + 0.02);
         g.gain.exponentialRampToValueAtTime(0.0001, t + k * dur + dur);
         o.connect(g); g.connect(ctx.destination);
         o.start(t + k * dur); o.stop(t + k * dur + dur + 0.03);
@@ -472,6 +473,15 @@
     });
 
     /* Depois a montagem da tela, cada etapa isolada */
+    /* Celulares (iPhone em especial) deixam o áudio suspenso até o primeiro toque: libera já no primeiro toque */
+    var liberarSom = function () {
+      tentar(function () {
+        ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+        if (ctx.state === 'suspended') ctx.resume();
+      });
+    };
+    document.addEventListener('pointerdown', liberarSom, { passive: true });
+    document.addEventListener('touchstart', liberarSom, { passive: true });
     tentar(montarMascotes);
     tentar(function () {
       document.querySelectorAll('.pagina p, .pagina li, .pagina dd, .pagina h3, .pagina h4, .pagina small, .lead, .dica').forEach(function (el) {
