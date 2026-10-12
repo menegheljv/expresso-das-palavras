@@ -76,8 +76,8 @@
       s.textContent = simbolos[i % simbolos.length];
       s.style.left = (Math.random() * 96) + '%';
       s.style.fontSize = (40 + Math.random() * 90) + 'px';
-      s.style.animationDuration = (16 + Math.random() * 18) + 's';
-      s.style.animationDelay = (-Math.random() * 30) + 's';
+      s.style.animationDuration = (40 + Math.random() * 30) + 's';
+      s.style.animationDelay = (-Math.random() * 70) + 's';
       s.style.setProperty('--giro-a', (Math.random() * 40 - 20) + 'deg');
       s.style.setProperty('--giro-b', (Math.random() * 120 - 60) + 'deg');
       fundo.appendChild(s);

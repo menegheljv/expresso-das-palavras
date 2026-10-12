@@ -109,3 +109,10 @@ main:has(.pagina.ativa) { align-items: flex-start; }
 
 .pagina .lead { margin-inline: 0; }
 body:has(.pagina.ativa) .cenario { opacity: .3; }
+
+.texto-branco { padding: var(--e4) var(--e5); background: var(--branco); border: var(--borda); border-radius: var(--r2); box-shadow: 0 4px 0 var(--ink); max-width: 66ch; }
+.texto-branco p { margin: 0; }
+.texto-branco p + p { margin-top: var(--e3); }
+.credito.texto-branco { margin-top: var(--e6); }
+
+.rodape { width: fit-content; max-width: calc(100% - 32px); margin: 0 auto var(--e5); padding: var(--e2) var(--e5); background: var(--branco); border: var(--borda); border-radius: var(--r3); }
