@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Expresso das Palavras</title>
 <meta name="description" content="Quiz animado, resumo da matéria e guia da prova de Língua Portuguesa do 9º ano, inspirado em Ibitiruí.">
-<link rel="icon" type="image/svg+xml" href="favicon.svg?v=33">
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=35">
 <meta name="theme-color" content="#eaf6dd">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:ital,wght@0,400;0,700;0,800;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=33">
-<link rel="stylesheet" href="paginas.css?v=33">
+<link rel="stylesheet" href="style.css?v=35">
+<link rel="stylesheet" href="paginas.css?v=35">
 </head>
 <body>
 <div class="fundo" id="fundo" aria-hidden="true"></div>
@@ -145,9 +145,18 @@
 
     <div class="palco">
       <div class="mascote-lateral" data-mascote id="mascote-jogo"></div>
+      <article class="cartao leitura" id="leitura" hidden aria-labelledby="leitura-titulo">
+        <p class="fonte" id="leitura-fonte"></p>
+        <h2 class="leitura-titulo" id="leitura-titulo"></h2>
+        <p class="leitura-autor" id="leitura-autor"></p>
+        <div class="texto-lido" id="leitura-texto"></div>
+        <p class="leitura-aviso">Leia com calma, sem limite de tempo. As 3 perguntas seguintes são sobre este texto e também não têm cronômetro. Você poderá reler o texto durante as perguntas.</p>
+        <button class="btn-grande" id="btn-li" type="button">Li o texto, ver as perguntas</button>
+      </article>
       <article class="cartao" id="cartao">
         <div class="tempo" aria-hidden="true"><i id="barra"></i><span id="tempo-txt">1:00</span></div>
         <p class="fonte" id="fonte"></p>
+        <details class="reler" id="reler" hidden><summary>Reler o texto</summary><div class="texto-lido" id="reler-texto"></div></details>
         <button class="figura" id="figura" type="button" hidden aria-label="Ampliar a imagem"><img id="figura-img" alt=""></button>
         <blockquote class="trecho" id="trecho"></blockquote>
         <h2 class="pergunta" id="pergunta"></h2>
@@ -511,7 +520,7 @@
 </main>
 
 
-<script src="questoes.js?v=33"></script>
-<script src="app.js?v=33"></script>
+<script src="questoes.js?v=35"></script>
+<script src="app.js?v=35"></script>
 </body>
 </html>

@@ -116,13 +116,6 @@ window.QUESTOES = [
   },
   /* ============ ESTAÇÃO 2: MÉDIO ============ */
   {
-    est: 2, fonte: 'Campanha de doação de sangue (Ministério da Saúde)',
-    trecho: 'Para doar sangue, é preciso ter de 16 a 69 anos, desde que a primeira doação tenha sido feita até 60 anos.',
-    pergunta: 'Nesse trecho, a linguagem utilizada é',
-    alts: ['formal.', 'regional.', 'científica.', 'coloquial.'],
-    certa: 0, d: D.D13
-  },
-  {
     est: 2, fonte: 'Notícia da campanha e cartaz de doação de sangue', img: 'cartaz-sangue.jpg',
     alt: 'Cartaz de campanha com uma mulher apontando para o braço e o texto "Salve até 4 vidas com um gesto. Doe sangue. Procure um hemocentro", do Ministério da Saúde.',
     trecho: 'Texto 1: o Ministério da Saúde lançou uma campanha com o lema "Doe Sangue Regularmente, com a Nossa União a Vida se Completa". Texto 2: o cartaz abaixo.',
@@ -150,20 +143,6 @@ window.QUESTOES = [
     pergunta: 'A palavra bichinho foi usada, no diminutivo, intencionalmente. Qual foi essa intenção?',
     alts: ['Apresentar ironia.', 'Revelar afetividade.', 'Indicar depreciação.', 'Determinar o tamanho.'],
     certa: 1, d: D.D19
-  },
-  {
-    est: 2, fonte: 'Crônica "Onde já se viu?", de Tatiana Belinky',
-    trecho: 'Eu já ia abrindo a bolsa para livrar-me logo <mark>dele</mark>, quando o garoto disse: "Escuta, tia..."',
-    pergunta: 'A palavra destacada se refere ao',
-    alts: ['livro.', 'menino.', 'dinheiro.', 'vendedor.'],
-    certa: 1, d: D.D2
-  },
-  {
-    est: 2, fonte: 'Notícia "Filtro do TikTok reaquece debate"',
-    trecho: '... o TikTok criou um filtro chamado "My New Twin", <mark>que</mark> vem sendo chamado de "galã de novela", por transformar o rosto do usuário em uma imagem de modelos...',
-    pergunta: 'O termo em destaque pode ser substituído, sem alteração de sentido, por',
-    alts: ['cujo.', 'onde.', 'quem.', 'o qual.'],
-    certa: 3, d: D.D2
   },
   {
     est: 2, fonte: 'Conto "O caso das amoras pretas", de Agatha Christie',
@@ -272,4 +251,50 @@ window.QUESTOES = [
     ],
     certa: 1, d: D.P032
   }
+  /* ---- Texto inteiro (Estação 2): 3 perguntas sobre a crônica, na ordem e com as letras do Listão do professor ---- */,
+  {
+    est: 2, grupo: 'belinky', fonte: 'Crônica "Onde já se viu?", de Tatiana Belinky',
+    pergunta: 'Qual fato ou situação foi o ponto de partida da crônica de Tatiana Belinky?',
+    alts: ['A presença de um menino de rua em uma livraria pedindo um livro.', 'A narradora se surpreender com um menino de rua.', 'O vendedor desconfiar de um pedido da narradora.', 'O menino sair correndo da livraria.'],
+    certa: 0, listao: { n: 15, gab: 'A' }, d: D.D10
+  },
+  {
+    est: 2, grupo: 'belinky', fonte: 'Crônica "Onde já se viu?", de Tatiana Belinky',
+    trecho: 'Eu já ia abrindo a bolsa para livrar-me logo <mark>dele</mark>, quando o garoto disse:',
+    pergunta: 'No trecho, a palavra destacada se refere ao',
+    alts: ['livro.', 'menino.', 'dinheiro.', 'vendedor.'],
+    certa: 1, listao: { n: 16, gab: 'B' }, d: D.D2
+  },
+  {
+    est: 2, grupo: 'belinky', fonte: 'Crônica "Onde já se viu?", de Tatiana Belinky',
+    pergunta: 'A crônica que você leu foi escrita para',
+    alts: ['relatar o comportamento desconfiado do vendedor da livraria.', 'mostrar, de forma crítica, o problema das crianças menos favorecidas.', 'descrever a admiração das pessoas que se encontravam na livraria.', 'refletir, de forma poética, sobre uma situação, despertando a emoção no leitor.'],
+    certa: 3, listao: { n: 19, gab: 'D' }, d: D.D12
+  }
 ];
+
+window.TEXTOS = {
+  belinky: {
+    titulo: 'Onde já se viu?',
+    autor: 'Tatiana Belinky',
+    origem: 'Crônica do livro "Olhos de ver" (Moderna, 2004), como aparece no Preparatório SAEB 9º ano 2025 (SEDUC).',
+    paragrafos: [
+      'Uma tarde de inverno, estava eu lá, na Rua Barão de Itapetininga, mexendo nas estantes de uma livraria. (Não consigo passar por uma sem entrar para fuçar no meio dos livros. Desde que eu tinha quatro anos de idade (o que já faz muito tempo) livro para mim é a coisa mais gostosa do mundo. A gente nunca sabe que surpresa vai encontrar entre duas capas. Pode ser coisa de boniteza, ou de tristeza, ou de poesia, ou de risada, ou de susto, sei lá. Um livro é sempre uma aventura, vale a pena tentar!).',
+      'Pois bem, estava eu ali, muito entretida, examinando os livros, quando de repente senti que alguém me puxava pela manga. Olhei para baixo e vi um menino, um garotinho de uns nove ou dez anos, magrelo, sujinho, de roupa esfarrapada e pé no chão. Uma dessas crianças que andam largadas pelas ruas da cidade, pedindo esmola. Ou, no melhor dos casos, vendendo colchetes ou dropes, essas coisas. Eu já ia abrindo a bolsa para livrar-me logo dele, quando o garoto disse:',
+      '- Escuta, tia... (naquele tempo, ninguém chamava a gente de tia: tia era só a irmã do pai ou da mãe).',
+      '- O quê? - perguntei. - O que você quer?',
+      '- Eu... dona, me compra um livro? - disse ele baixinho meio com medo.',
+      'Dizer que fiquei surpresa é pouco. O jeito do menino era de quem precisava de comida, de roupa, isso sim. Duvidei do que ouvira:',
+      '- Você não prefere algum dinheiro? - perguntei.',
+      '- Não, dona - disse o garoto, mais animado, olhando-me agora bem nos olhos. - Eu queria um livro. Me compra um livro?',
+      'Meu coração começou a bater mais forte.',
+      '- Escolha o livro que você quiser - falei.',
+      'As pessoas na livraria começaram a observar a cena, incrédulas e curiosas. O menino já estava junto à prateleira, procurando, examinando ora um livro, ora outro, todo excitado. Um vendedor se aproximou, meio desconfiado, com cara de querer intervir.',
+      '- Deixe o menino escolher um livro - falei. - Eu pago.',
+      'As pessoas em volta me olhavam admiradas. Onde já se viu alguém comprar um livro para um molequinho maltrapilho daqueles?',
+      'Pois vou lhes contar: foi exatamente o que se viu naquela tarde, naquela livraria. O menino acabou se decidindo por um livro de aventuras, nem me lembro qual. Mas me lembro bem da minha emoção quando lhe entreguei o volume e vi seus olhinhos brilhando ao me dizer um apressado obrigado, dona! Antes de sair em disparada, abraçando o livro apertado ao peito.',
+      'Quanto aos meus próprios olhos, estes embaçaram estranhamente, quando pensei comigo: "Tanta criança rica não sabe o que perde, não lendo, e este menino pobre (que certamente não era um pobre menino) sabe o valor que tem essa maravilha que se chama livro!"',
+      'Isso aconteceu há vários anos. Bem que eu gostaria de saber o que foi feito daquele menino...'
+    ]
+  }
+};

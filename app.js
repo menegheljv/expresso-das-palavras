@@ -251,20 +251,55 @@
     /* Plano B: com um questoes.js antigo (sem estações), usa todas as questões */
     if (!base.length) base = window.QUESTOES.filter(function (q) { return !cod || q.d.cod === cod; });
     if (!base.length) return;
-    var pool = embaralhar(base).slice(0, TOTAL).map(function (q) {
-      var alts = embaralhar(q.alts.map(function (t, i) { return { t: t, ok: i === q.certa }; }));
-      return { fonte: q.fonte, trecho: q.trecho || '', img: q.img || '', alt: q.alt || '', pergunta: q.pergunta, d: q.d, alts: alts };
-    });
-    st = { pool: pool, cod: cod || null, est: est || 0, i: 0, pontos: 0, combo: 0, melhor: 0, acertos: 0, erros: [], resultado: [], trava: false, t0: 0, raf: 0 };
+    /* Perguntas de um texto inteiro (grupo) ficam juntas no fim e só entram nas estações, não no treino por tema */
+    var soltas = base.filter(function (q) { return !q.grupo; });
+    var doGrupo = cod ? [] : base.filter(function (q) { return q.grupo; });
+    if (!soltas.length && !doGrupo.length) return;
+    var montar = function (q, fixo) {
+      var alts = q.alts.map(function (t, i) { return { t: t, ok: i === q.certa }; });
+      if (!fixo) alts = embaralhar(alts);
+      return { fonte: q.fonte, trecho: q.trecho || '', img: q.img || '', alt: q.alt || '', pergunta: q.pergunta, d: q.d, alts: alts, grupo: q.grupo || '', listao: q.listao || null };
+    };
+    var pool = embaralhar(soltas).slice(0, TOTAL - doGrupo.length).map(function (q) { return montar(q, false); })
+      .concat(doGrupo.map(function (q) { return montar(q, true); }));
+    st = { pool: pool, cod: cod || null, est: est || 0, i: 0, pontos: 0, combo: 0, melhor: 0, acertos: 0, erros: [], resultado: [], trava: false, t0: 0, raf: 0, lido: {}, leitura: false };
     $('#pontos').textContent = '0';
     montarTrem(pool.length);
     mostrar('jogo');
     renderCaso();
   }
 
+  function textoHtml(g) {
+    return window.TEXTOS[g].paragrafos.map(function (p) {
+      return '<p>' + p.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</p>';
+    }).join('');
+  }
+
+  /* Tela de leitura: o texto inteiro, sem cronômetro, antes das perguntas sobre ele */
+  function mostrarLeitura(q) {
+    var t = window.TEXTOS[q.grupo];
+    st.leitura = true;
+    cancelAnimationFrame(st.raf);
+    $('#caso-n').textContent = (st.est ? 'Estação ' + st.est + ' · ' : '') + 'leitura do texto';
+    atualizarTrem();
+    $('#leitura-fonte').textContent = 'Texto para as próximas 3 perguntas';
+    $('#leitura-titulo').textContent = t.titulo;
+    $('#leitura-autor').textContent = t.autor + '. ' + t.origem;
+    $('#leitura-texto').innerHTML = textoHtml(q.grupo);
+    $('#cartao').hidden = true;
+    $('#leitura').hidden = false;
+    humor($('#mascote-jogo'), 'neutro');
+    window.scrollTo(0, 0);
+  }
+
   function renderCaso() {
     var q = st.pool[st.i];
     st.trava = false;
+    var inicioGrupo = q.grupo && (st.i === 0 || st.pool[st.i - 1].grupo !== q.grupo);
+    if (inicioGrupo && !st.lido[q.grupo]) { mostrarLeitura(q); return; }
+    st.leitura = false;
+    $('#leitura').hidden = true;
+    $('#cartao').hidden = false;
     $('#caso-n').textContent = (st.est ? 'Estação ' + st.est + ' · ' : 'Treino · ') + 'pergunta ' + (st.i + 1) + ' de ' + st.pool.length;
     atualizarTrem();
     $('#fonte').textContent = q.fonte;
@@ -296,6 +331,13 @@
     cartao.classList.remove('troca'); void cartao.offsetWidth; cartao.classList.add('troca');
     humor($('#mascote-jogo'), 'neutro');
 
+    var semTempo = !!q.grupo;
+    var rl = $('#reler');
+    rl.hidden = !semTempo;
+    if (semTempo) { rl.open = false; $('#reler-texto').innerHTML = textoHtml(q.grupo); }
+    $('.tempo').classList.toggle('sem-tempo', semTempo);
+    cancelAnimationFrame(st.raf);
+    if (semTempo) { $('#tempo-txt').textContent = 'Sem limite de tempo'; return; }
     $('#barra').style.transform = 'scaleX(1)';
     $('.tempo').classList.remove('aperta');
     $('#tempo-txt').textContent = fmtTempo(TEMPO);
@@ -348,7 +390,7 @@
 
     var tit, txt;
     if (acertou) {
-      var ganho = 100 + Math.round(r) + Math.min(st.combo, 5) * 10;
+      var ganho = 100 + (q.grupo ? 30 : Math.round(r)) + Math.min(st.combo, 5) * 10;
       st.pontos += ganho; st.combo++; st.acertos++;
       if (st.combo > st.melhor) st.melhor = st.combo;
       tit = sorteia(ELOGIOS);
@@ -370,7 +412,9 @@
     atualizarCombo(); pop($('#combo'));
 
     $('#retorno-titulo').textContent = tit;
-    $('#retorno-texto').textContent = sv(txt + ' Habilidade ' + q.d.cod + ': ' + q.d.txt);
+    var justificativa = txt + ' Habilidade ' + q.d.cod + ': ' + q.d.txt;
+    if (q.listao) justificativa = txt + ' Listão do professor, questão ' + q.listao.n + ': gabarito ' + q.listao.gab + '. Habilidade ' + q.d.cod + ': ' + q.d.txt;
+    $('#retorno-texto').textContent = sv(justificativa);
     $('#btn-prox').textContent = st.i === st.pool.length - 1 ? 'Ver o resultado' : 'Próxima pergunta';
     $('#retorno').hidden = false;
     $('#btn-prox').focus({ preventScroll: true });
@@ -448,6 +492,9 @@
       });
     });
     on('#btn-prox', 'click', function () { tentar(proximo); });
+    on('#btn-li', 'click', function () {
+      tentar(function () { somClique(); st.lido[st.pool[st.i].grupo] = true; renderCaso(); window.scrollTo(0, 0); });
+    });
     on('#btn-som', 'click', function () {
       tentar(function () { mudo = !mudo; gravar('dp-mudo', mudo ? '1' : '0'); atualizarBotaoSom(); somClique(); });
     });
@@ -459,6 +506,10 @@
         if (e.key === 'Escape') { fecharImagem(); return; }
         if (e.ctrlKey || e.metaKey || e.altKey) return;
         if (!$('#jogo').classList.contains('ativa') || !st || !$('#lightbox').hidden) return;
+        if (st.leitura) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('#btn-li').click(); }
+          return;
+        }
         var k = e.key.toLowerCase();
         var idx = 'abcd'.indexOf(k);
         if (idx < 0 && /^[1-4]$/.test(k)) idx = parseInt(k, 10) - 1;

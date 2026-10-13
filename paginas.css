@@ -391,3 +391,18 @@ html { scrollbar-gutter: stable; }
   .topo .marca { justify-self: start; }
   .topo .som { justify-self: end; }
 }
+
+
+/* ===== Texto inteiro para ler, sem cronômetro ===== */
+.leitura { flex: 1; min-width: 0; }
+.leitura-titulo { margin: 0 0 var(--e1); font: 800 clamp(1.75rem, 4vw, 2.5rem)/1.1 var(--titulo); letter-spacing: -.01em; text-wrap: balance; }
+.leitura-autor { margin: 0 0 var(--e5); font-weight: 700; font-size: .9375rem; max-width: 66ch; text-wrap: pretty; }
+.texto-lido { max-width: 66ch; font-size: 1.125rem; line-height: 1.7; }
+.texto-lido p { margin: 0 0 var(--e3); text-wrap: pretty; }
+.leitura-aviso { margin: var(--e5) 0; padding: var(--e3) var(--e4); max-width: 66ch; background: #fff3c4; border: var(--borda); border-radius: var(--r1); font-weight: 700; text-wrap: pretty; }
+.reler { margin: 0 0 var(--e4); background: var(--papel); border: var(--borda); border-radius: var(--r1); }
+.reler summary { min-height: 48px; padding: 0 var(--e4); display: flex; align-items: center; font-weight: 800; cursor: pointer; }
+.reler[open] summary { border-bottom: var(--borda); }
+.reler .texto-lido { padding: var(--e4); max-height: 50vh; overflow: auto; }
+.tempo.sem-tempo { background: #fff3c4; }
+.tempo.sem-tempo i { display: none; }
