@@ -2,7 +2,7 @@
   'use strict';
 
   var TOTAL = 10;
-  var TEMPO = 30;
+  var TEMPO = 60;
   var ESTACOES_N = 3;
   var LETRAS = ['A', 'B', 'C', 'D'];
   var reduzir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -298,19 +298,20 @@
 
     $('#barra').style.transform = 'scaleX(1)';
     $('.tempo').classList.remove('aperta');
-    $('#tempo-txt').textContent = TEMPO;
+    $('#tempo-txt').textContent = fmtTempo(TEMPO);
     st.t0 = performance.now();
     cancelAnimationFrame(st.raf);
     st.raf = requestAnimationFrame(tick);
   }
 
+  function fmtTempo(s) { return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
   function restante() { return Math.max(0, TEMPO - (performance.now() - st.t0) / 1000); }
 
   function tick() {
     var r = restante();
     $('#barra').style.transform = 'scaleX(' + (r / TEMPO) + ')';
-    $('#tempo-txt').textContent = Math.ceil(r);
-    $('.tempo').classList.toggle('aperta', r <= 8);
+    $('#tempo-txt').textContent = fmtTempo(Math.ceil(r));
+    $('.tempo').classList.toggle('aperta', r <= 10);
     if (r <= 0) { responder(-1); return; }
     st.raf = requestAnimationFrame(tick);
   }
@@ -347,7 +348,7 @@
 
     var tit, txt;
     if (acertou) {
-      var ganho = 100 + Math.round(r * 2) + Math.min(st.combo, 5) * 10;
+      var ganho = 100 + Math.round(r) + Math.min(st.combo, 5) * 10;
       st.pontos += ganho; st.combo++; st.acertos++;
       if (st.combo > st.melhor) st.melhor = st.combo;
       tit = sorteia(ELOGIOS);
