@@ -378,3 +378,8 @@ body:has(#inicio.ativa) .topo .nav { display: flex; }
   #inicio .inicio-texto { padding-top: clamp(24px, 8.5vh, 80px); }
   #inicio .inicio-esq .mascote-grande { width: min(200px, 25vh); }
 }
+
+/* ===== Jacupemba um pouco mais abaixo do título (computador) ===== */
+@media (min-width: 761px) {
+  #inicio .inicio-esq .mascote-grande { margin-top: 6px; }
+}

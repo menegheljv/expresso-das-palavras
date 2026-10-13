@@ -52,15 +52,15 @@ window.QUESTOES = [
     certa: 3, d: D.D1
   },
   {
-    est: 1, fonte: 'Anúncio da Lacta', img: 'anuncio-lacta.jpg',
-    alt: 'Anúncio com uma boca aberta e a frase "Fechada. Aberta. Fechada. Aberta. Fechada. Aberta. 5 novidades para deixar você de boca aberta", com produtos da marca Lacta.',
+    est: 1, fonte: 'Anúncio de chocolates',
+    trecho: 'Fechada. Aberta. Fechada. Aberta. Fechada. Aberta. 5 novidades para deixar você de boca aberta!',
     pergunta: 'O anúncio fala principalmente sobre',
     alts: ['o cozimento do chocolate.', 'os movimentos da boca.', 'os ingredientes do chocolate.', 'o produto de uma marca específica.'],
     certa: 3, d: D.D6
   },
   {
-    est: 1, fonte: 'Anúncio da Lacta', img: 'anuncio-lacta.jpg',
-    alt: 'Anúncio com uma boca aberta e a frase "Fechada. Aberta. Fechada. Aberta. Fechada. Aberta. 5 novidades para deixar você de boca aberta", com produtos da marca Lacta.',
+    est: 1, fonte: 'Anúncio de chocolates',
+    trecho: 'Fechada. Aberta. Fechada. Aberta. Fechada. Aberta. 5 novidades para deixar você de boca aberta!',
     pergunta: 'Qual é a finalidade desse gênero textual?',
     alts: ['Listar ingredientes culinários.', 'Descrever o movimento da boca.', 'Explicar como se faz um chocolate.', 'Persuadir o leitor a comprar um chocolate.'],
     certa: 3, d: D.D12
@@ -188,8 +188,8 @@ window.QUESTOES = [
   },
   /* ============ ESTAÇÃO 3: DIFÍCIL ============ */
   {
-    est: 3, fonte: 'Anúncio da Lacta', img: 'anuncio-lacta.jpg',
-    alt: 'Anúncio com uma boca aberta e a frase "Fechada. Aberta. Fechada. Aberta. Fechada. Aberta. 5 novidades para deixar você de boca aberta", com produtos da marca Lacta.',
+    est: 3, fonte: 'Anúncio de chocolates',
+    trecho: 'Fechada. Aberta. Fechada. Aberta. Fechada. Aberta. 5 novidades para deixar você de boca aberta!',
     pergunta: 'Na frase "Fechada. Aberta. Fechada. Aberta. Fechada. Aberta.", a repetição de palavras foi empregada com a intenção de',
     alts: ['sugerir um estilo comum de escrita.', 'apresentar uma sequência de ideias.', 'expor a pressa do autor ao construir o texto.', 'criar efeito de sentido e persuadir o consumidor.'],
     certa: 3, d: D.D19
