@@ -383,3 +383,11 @@ body:has(#inicio.ativa) .topo .nav { display: flex; }
 @media (min-width: 761px) {
   #inicio .inicio-esq .mascote-grande { margin-top: 6px; }
 }
+
+/* ===== Abas sempre no mesmo lugar, centralizadas na página ===== */
+html { scrollbar-gutter: stable; }
+@media (min-width: 761px) {
+  .topo { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .topo .marca { justify-self: start; }
+  .topo .som { justify-self: end; }
+}
