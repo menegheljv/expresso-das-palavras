@@ -322,7 +322,7 @@
   }
   function pop(el) { el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
 
-  var ELOGIOS = ['Boa, maquinista!', 'Parada certa!', 'Olho de lince!', 'Mandou bem!', 'Na mosca!'];
+  var ELOGIOS = ['Boa, maquinista!', 'Parada certa!', 'Bico certeiro!', 'Mandou bem!', 'Na mosca!'];
   var ENGANOS = [
     'Foi engano! E olha que Ibitiruí já se chamou Engano.',
     'Engano seu? Por aqui isso é tradição, o nome da estação já foi esse.',
