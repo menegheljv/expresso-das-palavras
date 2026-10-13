@@ -59,25 +59,11 @@ window.QUESTOES = [
     certa: 2, d: D.P021
   },
   {
-    est: 1, fonte: 'Notícia "Disciplinamento da orla desagrada banhista"',
-    trecho: 'Antes mesmo de ser votado pela Assembleia Legislativa, o projeto de lei que disciplina a prática desportiva nas praias do litoral pernambucano já está causando polêmica. Nem todos os banhistas e desportistas concordam com as proibições sugeridas pelo projeto.',
-    pergunta: 'O objetivo desse texto é',
-    alts: ['informar o leitor.', 'ensinar uma regra.', 'defender uma opinião.', 'anunciar um produto.'],
-    certa: 0, d: D.P016
-  },
-  {
     est: 1, fonte: 'Texto "Anne e a Casa dos Sonhos"',
     trecho: '"Anne e a Casa dos Sonhos" é o quinto livro da série Anne de Green Gables. Mais uma vez somos encantados com o jeito particular e incrível de Anne de construir laços tão intensos em qualquer lugar que ela vai. Os personagens são ótimos e muito bem desenvolvidos, nos levando a torcer para que tudo dê certo no final.',
     pergunta: 'Esse texto é',
     alts: ['uma carta.', 'uma crônica.', 'uma notícia.', 'uma resenha.'],
     certa: 3, d: D.P017
-  },
-  {
-    est: 1, fonte: 'Tirinha da Turma da Mônica, de Maurício de Sousa',
-    trecho: 'Ô Zé Lelé! Num fica aí parado! Faz alguma coisa!',
-    pergunta: 'O trecho "Num fica aí parado!" é um exemplo de linguagem',
-    alts: ['científica.', 'coloquial.', 'técnica.', 'formal.'],
-    certa: 1, d: D.D13
   },
   {
     est: 1, fonte: 'Conto "O sonho de José"',
@@ -99,13 +85,6 @@ window.QUESTOES = [
     pergunta: 'Qual é o assunto desse texto?',
     alts: ['A respiração dos cães.', 'As irritações que os cães sofrem devido a odores.', 'O sistema olfativo dos cães.', 'Os perfumes mais usados pelos donos de cães.'],
     certa: 2, d: D.P028
-  },
-  {
-    est: 1, fonte: 'Livro "O Menino Maluquinho", de Ziraldo',
-    trecho: 'Vamos levar pro salão!',
-    pergunta: 'No trecho, foi utilizada a linguagem',
-    alts: ['científica.', 'informal.', 'regional.', 'técnica.'],
-    certa: 1, d: D.P103
   },
   {
     est: 1, fonte: 'Piada "Papagaio bilíngue"',
@@ -167,13 +146,6 @@ window.QUESTOES = [
   },
   /* ============ ESTAÇÃO 3: DIFÍCIL ============ */
   {
-    est: 3, fonte: 'Artigo "Adoção, um ato de amor"',
-    trecho: '<mark>Segundo</mark> o Conselho Nacional de Justiça (CNJ), só 3% de pais pretendentes aceitam receber filhos adotivos acima de dois anos de idade...',
-    pergunta: 'O elemento articulador destacado foi usado para',
-    alts: ['indicar adição.', 'mostrar oposição.', 'apresentar explicação.', 'apontar conformidade.'],
-    certa: 3, d: D.D15
-  },
-  {
     est: 3, fonte: 'Cartaz sobre leitura', img: 'cartaz-leitura.jpg',
     alt: 'Ilustração de um homem sentado numa poltrona verde lendo um livro, com o texto "Às vezes você pega um livro, às vezes um livro te pega".',
     pergunta: 'O verbo pegar, na expressão "às vezes um livro te pega", provoca o seguinte efeito de sentido:',
@@ -193,13 +165,6 @@ window.QUESTOES = [
     certa: 2, d: D.D14
   },
   {
-    est: 3, fonte: 'Notícia "Filtro do TikTok reaquece debate"',
-    trecho: '"Muitos pacientes chegam ao consultório buscando alterar tantos pontos da aparência e é necessário identificar esses distúrbios para o encaminhamento correto ao psiquiatra", avaliou a cirurgiã plástica.',
-    pergunta: 'Esse trecho é um tipo de argumento de',
-    alts: ['autoridade.', 'comparação.', 'exemplificação.', 'alusão histórica.'],
-    certa: 0, d: D.D8
-  },
-  {
     est: 3, fonte: 'Artigo "Adoção, um ato de amor"',
     trecho: 'O artigo traz dados do Cadastro Nacional de Adoção, histórias e argumentos para defender a adoção tardia.',
     pergunta: 'Em qual trecho predomina um argumento de senso comum?',
@@ -210,13 +175,6 @@ window.QUESTOES = [
       '"... só 3% de pais pretendentes aceitam receber filhos adotivos acima de dois anos de idade, ou seja, os que estão na adoção tardia."'
     ],
     certa: 2, d: D.D8
-  },
-  {
-    est: 3, fonte: 'Notícia "Filtro do TikTok reaquece debate"',
-    trecho: '"Muitos pacientes chegam ao consultório buscando alterar tantos pontos da aparência e <mark>é necessário</mark> identificar esses distúrbios para o encaminhamento correto ao psiquiatra."',
-    pergunta: 'A expressão destacada, nesse texto, é um modalizador de',
-    alts: ['obrigação.', 'permissão.', 'necessidade.', 'possibilidade.'],
-    certa: 2, d: D.MOD
   },
   {
     est: 3, fonte: 'Poema "Fanatismo", de Florbela Espanca',
@@ -270,10 +228,87 @@ window.QUESTOES = [
     pergunta: 'A crônica que você leu foi escrita para',
     alts: ['relatar o comportamento desconfiado do vendedor da livraria.', 'mostrar, de forma crítica, o problema das crianças menos favorecidas.', 'descrever a admiração das pessoas que se encontravam na livraria.', 'refletir, de forma poética, sobre uma situação, despertando a emoção no leitor.'],
     certa: 3, listao: { n: 19, gab: 'D' }, d: D.D12
+  },
+  /* ---- Texto inteiro (Estação 1): 3 perguntas, ordem e letras do Listão do professor (questões 12, 13 e 14) ---- */
+  {
+    est: 1, grupo: 'sangue', fonte: 'Notícia e cartaz sobre doação de sangue',
+    pergunta: 'Qual é a informação em comum nesses textos?',
+    alts: ['A campanha de doação de sangue.', 'Os requisitos para a doação de sangue.', 'A campanha de vacinação em crianças.', 'A importância de as mulheres doarem sangue.'],
+    certa: 0, listao: { n: 12, gab: 'A' }, d: D.D20
+  },
+  {
+    est: 1, grupo: 'sangue', fonte: 'Notícia e cartaz sobre doação de sangue',
+    pergunta: 'Esses dois textos apresentam ideias',
+    alts: ['contrárias.', 'incoerentes.', 'semelhantes.', 'complementares.'],
+    certa: 2, listao: { n: 13, gab: 'C' }, d: { cod: 'D21', txt: 'Reconhecer posições distintas entre duas ou mais opiniões relativas ao mesmo fato ou ao mesmo tema.' }
+  },
+  {
+    est: 1, grupo: 'sangue', fonte: 'Notícia e cartaz sobre doação de sangue',
+    trecho: 'Para doar sangue, é preciso ter de 16 a 69 anos, desde que a primeira doação tenha sido feita até 60 anos.',
+    pergunta: 'No Texto 1, nesse trecho do 2º parágrafo, a linguagem utilizada é',
+    alts: ['formal.', 'regional.', 'científica.', 'coloquial.'],
+    certa: 0, listao: { n: 14, gab: 'A' }, d: D.D13
+  },
+  /* ---- Texto inteiro (Estação 3): 3 perguntas, ordem e letras do Listão do professor (questões 6, 7 e 8) ---- */
+  {
+    est: 3, grupo: 'tiktok', fonte: 'Notícia "Filtro do TikTok reaquece debate sobre os distúrbios de imagem"',
+    trecho: '"Muitos pacientes chegam ao consultório buscando alterar tantos pontos da aparência e é necessário identificar esses distúrbios para o encaminhamento correto ao psiquiatra", avaliou a cirurgiã plástica.',
+    pergunta: 'Esse trecho é um tipo de argumento de',
+    alts: ['autoridade.', 'comparação.', 'exemplificação.', 'alusão histórica.'],
+    certa: 0, listao: { n: 6, gab: 'A' }, d: D.D8
+  },
+  {
+    est: 3, grupo: 'tiktok', fonte: 'Notícia "Filtro do TikTok reaquece debate sobre os distúrbios de imagem"',
+    trecho: '"Muitos pacientes chegam ao consultório buscando alterar tantos pontos da aparência e <mark>é necessário</mark> identificar esses distúrbios para o encaminhamento correto ao psiquiatra", avaliou.',
+    pergunta: 'A expressão destacada, nesse texto, é um modalizador de',
+    alts: ['obrigação.', 'permissão.', 'necessidade.', 'possibilidade.'],
+    certa: 2, listao: { n: 7, gab: 'C' }, d: D.MOD
+  },
+  {
+    est: 3, grupo: 'tiktok', fonte: 'Notícia "Filtro do TikTok reaquece debate sobre os distúrbios de imagem"',
+    trecho: '"Nessa fase da vida, a autoestima ainda depende muito de uma boa aparência, logo, aparecer bem nas selfies torna-se quase que uma obrigação. Há <mark>também</mark> o desejo de receber \'likes\' e obter mais \'seguidores\' nas mídias sociais, <mark>já que</mark> os adolescentes pensam nisso como sua posição social. No total, esses fatores motivam muitos jovens a querer se submeter à cirurgia plástica", explica.',
+    pergunta: 'Os termos em destaque estabelecem, respectivamente, uma relação de',
+    alts: ['causa e condição.', 'adição e oposição.', 'finalidade e causa.', 'adição e explicação.'],
+    certa: 3, listao: { n: 8, gab: 'D' }, d: D.D15
   }
 ];
 
 window.TEXTOS = {
+  sangue: {
+    titulo: 'Campanha de doação de sangue',
+    autor: 'Texto 1: notícia da Agência Brasil. Texto 2: cartaz da campanha',
+    origem: 'Como aparecem no Preparatório SAEB 9º ano 2025 (SEDUC).',
+    imagem: 'cartaz-sangue.jpg',
+    imagemAlt: 'Cartaz com uma mulher apontando para o braço e o texto "Salve até 4 vidas com um gesto. Doe sangue. Procure um hemocentro", do Ministério da Saúde.',
+    rotuloImagem: 'Texto 2',
+    paragrafos: [
+      '#Texto 1',
+      'Ministério da Saúde lança campanha de doação de sangue',
+      'Lançamento ocorre no Dia Mundial do Doador de Sangue',
+      'Com o lema Doe Sangue Regularmente, com a Nossa União a Vida se Completa, o Ministério da Saúde lançou hoje (14) uma campanha para incentivar a população a doar sangue regularmente. [...]',
+      'Para doar sangue, é preciso ter de 16 a 69 anos, desde que a primeira doação tenha sido feita até 60 anos (menores de 18 anos devem apresentar consentimento formal do responsável legal); pesar no mínimo 50 quilos; e estar alimentado. No dia da coleta, o doador não deve ingerir alimentos gordurosos antes da doação; deve ter dormido pelo menos seis horas nas últimas 24 horas; e apresentar documento oficial de identificação com foto.',
+      'Uma única doação de sangue, de 450 mililitros, é suficiente para salvar a vida de até 4 pessoas. Além disso, essa quantidade é reposta no organismo em 24 horas.',
+      '[...]'
+    ]
+  },
+  tiktok: {
+    titulo: 'Filtro do TikTok reaquece debate sobre os distúrbios de imagem',
+    autor: 'Gabriel Ferneda, da CNN, em São Paulo',
+    origem: 'Notícia como aparece no Preparatório SAEB 9º ano 2025 (SEDUC).',
+    paragrafos: [
+      'Brazilian Association of Plastic Surgeons disse que situação agrava pacientes com transtorno dismórfico corporal',
+      'O crescente número de cirurgias plásticas vem levantando um debate sobre distúrbios de imagem na sociedade contemporânea.',
+      'Segundo a Sociedade Brasileira de Cirurgia Plástica (SBCP), foram feitas 1.306.962 intervenções cirúrgicas estéticas no Brasil em 2023, contra 459 mil entre 2007 e 2008.',
+      'Segundo a Brazilian Association of Plastic Surgeons (BAPS), um dos vilões de doenças e distúrbios de imagem são as redes sociais.',
+      'Um estudo da BAPS mostrou que as mídias sociais agravam um problema que atinge mais de 4 milhões de brasileiros de 15 a 30 anos: o transtorno dismórfico corporal.',
+      'Esse distúrbio faz com que as pessoas tenham um foco obsessivo em características que consideram inadequadas para sua aparência. Dessa forma, elas perdem a capacidade de reconhecer de forma realista a beleza do seu corpo.',
+      'Recentemente, o TikTok criou um filtro chamado "My New Twin", que vem sendo chamado de "galã de novela", por transformar o rosto do usuário em uma imagem de modelos.',
+      'De acordo com a cirurgiã plástica Dra. Heloise Manfrim, sócia-fundadora da BAPS, filtros de redes sociais vem tendo um papel que agrava distúrbios de imagem como o transtorno dismórfico corporal.',
+      '"Hoje, está sendo muito comum principalmente por influência dos filtros dos aplicativos como Instagram e Snapchat ou até mesmo pelo photoshop que hoje faz com que o culto à aparência acabe massacrando as peculiaridades dos corpos reais, das vidas reais, de pessoas reais. Muitos pacientes chegam ao consultório buscando alterar tantos pontos da aparência e é necessário identificar esses distúrbios para o encaminhamento correto ao psiquiatra", avaliou.',
+      'Heloise Manfrim afirmou também que é comum que distúrbios deste tipo aconteçam entre a infância e o início da fase adulta.',
+      '"Nessa fase da vida, a autoestima ainda depende muito de uma boa aparência, logo, aparecer bem nas selfies torna-se quase que uma obrigação. Há também o desejo de receber \'likes\' e obter mais \'seguidores\' nas mídias sociais, já que os adolescentes pensam nisso como sua posição social. No total, esses fatores motivam muitos jovens a querer se submeter à cirurgia plástica", explica.'
+    ]
+  },
   belinky: {
     titulo: 'Onde já se viu?',
     autor: 'Tatiana Belinky',

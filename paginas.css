@@ -406,3 +406,10 @@ html { scrollbar-gutter: stable; }
 .reler .texto-lido { padding: var(--e4); max-height: 50vh; overflow: auto; }
 .tempo.sem-tempo { background: #fff3c4; }
 .tempo.sem-tempo i { display: none; }
+
+
+/* ===== Textos com subtítulo e imagem ===== */
+.texto-lido h3 { margin: var(--e4) 0 var(--e2); font: 800 1.25rem/1.2 var(--titulo); }
+.texto-lido h3:first-child { margin-top: 0; }
+.texto-fig { margin: var(--e4) 0 0; padding: 0; }
+.texto-fig img { display: block; max-width: 100%; max-height: 340px; width: auto; height: auto; border: var(--borda); border-radius: var(--r1); background: var(--branco); }

@@ -270,9 +270,16 @@
   }
 
   function textoHtml(g) {
-    return window.TEXTOS[g].paragrafos.map(function (p) {
-      return '<p>' + p.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</p>';
+    var t = window.TEXTOS[g];
+    var esc = function (s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+    var html = t.paragrafos.map(function (p) {
+      return p.charAt(0) === '#' ? '<h3>' + esc(p.slice(1)) + '</h3>' : '<p>' + esc(sv(p)) + '</p>';
     }).join('');
+    if (t.imagem) {
+      var src = t.imagem.indexOf('data:') === 0 ? t.imagem : 'img/' + t.imagem;
+      html += '<figure class="texto-fig"><h3>' + esc(t.rotuloImagem || 'Imagem') + '</h3><img src="' + src + '" alt="' + esc(t.imagemAlt || '').replace(/"/g, '&quot;') + '"></figure>';
+    }
+    return html;
   }
 
   /* Tela de leitura: o texto inteiro, sem cronômetro, antes das perguntas sobre ele */
