@@ -52,18 +52,18 @@ window.QUESTOES = [
     certa: 3, d: D.D1
   },
   {
-    est: 1, fonte: 'Anúncio de chocolates',
-    trecho: 'Fechada. Aberta. Fechada. Aberta. Fechada. Aberta. 5 novidades para deixar você de boca aberta!',
-    pergunta: 'O anúncio fala principalmente sobre',
-    alts: ['o cozimento do chocolate.', 'os movimentos da boca.', 'os ingredientes do chocolate.', 'o produto de uma marca específica.'],
-    certa: 3, d: D.D6
+    est: 1, fonte: 'Reportagem sobre o Museu Florestal, em São Paulo',
+    trecho: 'O museu tem um acervo com madeiras, frutos e sementes de árvores do Brasil. "A ideia é manter um registro dessas espécies caso elas sejam extintas", diz Roselaine Machado, responsável pela instituição.',
+    pergunta: 'De acordo com o texto, o museu foi criado para',
+    alts: ['estudar um momento da história brasileira.', 'fazer o cultivo de espécies vegetais curiosas.', 'registrar árvores que podem ser extintas.', 'valorizar a vegetação do estado de São Paulo.'],
+    certa: 2, d: D.P021
   },
   {
-    est: 1, fonte: 'Anúncio de chocolates',
-    trecho: 'Fechada. Aberta. Fechada. Aberta. Fechada. Aberta. 5 novidades para deixar você de boca aberta!',
-    pergunta: 'Qual é a finalidade desse gênero textual?',
-    alts: ['Listar ingredientes culinários.', 'Descrever o movimento da boca.', 'Explicar como se faz um chocolate.', 'Persuadir o leitor a comprar um chocolate.'],
-    certa: 3, d: D.D12
+    est: 1, fonte: 'Notícia "Disciplinamento da orla desagrada banhista"',
+    trecho: 'Antes mesmo de ser votado pela Assembleia Legislativa, o projeto de lei que disciplina a prática desportiva nas praias do litoral pernambucano já está causando polêmica. Nem todos os banhistas e desportistas concordam com as proibições sugeridas pelo projeto.',
+    pergunta: 'O objetivo desse texto é',
+    alts: ['informar o leitor.', 'ensinar uma regra.', 'defender uma opinião.', 'anunciar um produto.'],
+    certa: 0, d: D.P016
   },
   {
     est: 1, fonte: 'Texto "Anne e a Casa dos Sonhos"',
@@ -188,11 +188,11 @@ window.QUESTOES = [
   },
   /* ============ ESTAÇÃO 3: DIFÍCIL ============ */
   {
-    est: 3, fonte: 'Anúncio de chocolates',
-    trecho: 'Fechada. Aberta. Fechada. Aberta. Fechada. Aberta. 5 novidades para deixar você de boca aberta!',
-    pergunta: 'Na frase "Fechada. Aberta. Fechada. Aberta. Fechada. Aberta.", a repetição de palavras foi empregada com a intenção de',
-    alts: ['sugerir um estilo comum de escrita.', 'apresentar uma sequência de ideias.', 'expor a pressa do autor ao construir o texto.', 'criar efeito de sentido e persuadir o consumidor.'],
-    certa: 3, d: D.D19
+    est: 3, fonte: 'Artigo "Adoção, um ato de amor"',
+    trecho: '<mark>Segundo</mark> o Conselho Nacional de Justiça (CNJ), só 3% de pais pretendentes aceitam receber filhos adotivos acima de dois anos de idade...',
+    pergunta: 'O elemento articulador destacado foi usado para',
+    alts: ['indicar adição.', 'mostrar oposição.', 'apresentar explicação.', 'apontar conformidade.'],
+    certa: 3, d: D.D15
   },
   {
     est: 3, fonte: 'Cartaz sobre leitura', img: 'cartaz-leitura.jpg',
