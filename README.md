@@ -8,7 +8,7 @@ A mascote é a jacupemba. O trem anda a cada questão respondida, e o cenário t
 
 ## O que tem
 
-- **Jogar**: 3 estações de 10 perguntas (30 no total), da mais fácil à mais difícil, com 6 questões ilustradas. Cada estação tem 10 vagões, um por pergunta, que ficam verdes ou vermelhos conforme o resultado. 30 segundos por pergunta, pontos por velocidade e combo de acertos. Funciona com o teclado (A, B, C, D) e tem som e confete.
+- **Jogar**: 3 estações de 10 perguntas (30 no total), da mais fácil à mais difícil, com 6 questões ilustradas. Cada estação tem 10 vagões, um por pergunta, que ficam verdes ou vermelhos conforme o resultado. 1 minuto por pergunta, pontos por velocidade e combo de acertos. Funciona com o teclado (A, B, C, D) e tem som e confete.
 - **Matéria**: 14 temas com resumo, como cai na prova, exemplo e truque. Os temas com questões no quiz têm o botão "Treinar este tema".
 - **A prova**: o que são o Saeb e o Paebes, como uma questão é montada, passo a passo para a hora H, armadilhas comuns e as habilidades do Paebes por família.
 
