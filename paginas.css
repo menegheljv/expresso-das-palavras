@@ -455,11 +455,12 @@ a.marca:hover { text-decoration: underline; }
 .a-desc { margin-top: var(--e3); font-weight: 800; text-wrap: balance; }
 .a-meta { font-size: .875rem; font-weight: 700; }
 @media (max-width: 560px) {
-  .anos { grid-template-columns: 1fr; gap: var(--e3); width: 100%; max-width: 360px; }
-  .ano-card { grid-template-columns: auto 1fr; grid-template-rows: auto auto auto; justify-items: start; column-gap: var(--e4); align-items: center; padding-top: calc(var(--e4) + 10px); text-align: left; }
-  .a-num { grid-row: 1 / 3; font-size: 3.25rem; }
-  .a-ano { grid-column: 2; margin: 0; }
-  .a-desc { grid-column: 2; margin-top: 0; }
-  .a-meta { grid-column: 1 / -1; margin-top: var(--e1); }
+  /* Os dois anos lado a lado; min-height mantém a altura de antes, então a jacupemba não sai do lugar */
+  .anos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--e3); width: 100%; max-width: 360px; min-height: 310px; align-content: start; }
+  .ano-card { padding: calc(var(--e4) + 10px) var(--e3) var(--e3); }
+  .a-num { font-size: 3.25rem; }
+  .a-ano { font-size: 1.125rem; }
+  .a-desc { margin-top: var(--e2); font-size: .875rem; }
+  .a-meta { margin-top: var(--e1); font-size: .8125rem; }
   #escolha .mascote-grande { width: min(130px, 16vh); }
 }
