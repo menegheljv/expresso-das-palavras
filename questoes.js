@@ -2,6 +2,8 @@
    Fontes: Preparatório SAEB 9º Ano 2025 (SEDUC) e Coletânea de Itens Paebes 2024 (SEDU-ES, CAEd/UFJF).
    "est" é a estação (1 a 3, da mais fácil à mais difícil). "certa" é o índice da alternativa correta.
    "d" é o descritor/habilidade cobrado. "img" é opcional (arquivo em img/). */
+window.TURMA = { id: '9', nome: '9º ano', tempo: 60, storage: 'dp' };
+
 window.ESTACOES = {
   1: { nome: 'Saída tranquila', sub: 'Tema, gênero e linguagem do dia a dia', nivel: 1, rotulo: 'Fácil' },
   2: { nome: 'Serra acima', sub: 'Sentido das palavras, coesão e causa', nivel: 2, rotulo: 'Médio' },

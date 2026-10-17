@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Expresso das Palavras</title>
-<meta name="description" content="Quiz animado, resumo da matéria e guia da prova de Língua Portuguesa do 9º ano, inspirado em Ibitiruí.">
-<link rel="icon" type="image/svg+xml" href="favicon.svg?v=37">
+<meta name="description" content="Quiz animado de Língua Portuguesa para o 5º e o 9º ano, com questões do Saeb e do Paebes, inspirado em Ibitiruí.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=40">
 <meta name="theme-color" content="#eaf6dd">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:ital,wght@0,400;0,700;0,800;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=37">
-<link rel="stylesheet" href="paginas.css?v=37">
+<link rel="stylesheet" href="style.css?v=40">
+<link rel="stylesheet" href="paginas.css?v=40">
 </head>
-<body>
+<body class="pagina-inicial">
 <div class="fundo" id="fundo" aria-hidden="true"></div>
 
 <div class="cenario" aria-hidden="true">
@@ -105,422 +105,35 @@
   </g>
 </svg>
 </div>
-<canvas id="confete" aria-hidden="true"></canvas>
-<div class="lightbox" id="lightbox" hidden role="dialog" aria-label="Imagem ampliada"><button type="button" class="lb-fechar" id="lb-fechar">Fechar</button><img id="lb-img" alt=""></div>
 
-<header class="topo">
+<header class="topo topo-simples">
   <span class="marca">Expresso das Palavras</span>
-  <nav class="nav" aria-label="Seções">
-    <button type="button" data-ir="inicio" aria-current="page">Jogar</button>
-    <button type="button" data-ir="materia">Matéria</button>
-    <button type="button" data-ir="prova">A prova</button>
-  </nav>
-  <button class="som" id="btn-som" type="button" aria-pressed="false">
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="ondas" d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="corte" d="M4 4l16 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-    <span id="som-txt">Som ligado</span>
-  </button>
 </header>
 
 <main>
-  <!-- INÍCIO -->
-  <section class="tela ativa" id="inicio" aria-labelledby="t-inicio">
-    <div class="inicio-esq">
-      <p class="etiqueta">Estação Ibitiruí · 9º ano</p>
-      <h1 id="t-inicio">Expresso<br>das Palavras</h1>
-      <div class="mascote-grande" data-mascote></div>
+  <section class="tela ativa" id="escolha" aria-labelledby="t-escolha">
+    <p class="etiqueta">Estação Ibitiruí</p>
+    <h1 id="t-escolha">Expresso das Palavras</h1>
+    <div class="mascote-grande" data-mascote></div>
+    <p class="escolha-pergunta">Em qual ano você está?</p>
+    <div class="anos">
+      <a class="ano-card a5" href="5ano.html">
+        <span class="a-num">5º</span>
+        <span class="a-ano">ano</span>
+        <span class="a-desc">Textos curtos, piadas e tirinhas</span>
+        <span class="a-meta">30 perguntas em 3 estações</span>
+      </a>
+      <a class="ano-card a9" href="9ano.html">
+        <span class="a-num">9º</span>
+        <span class="a-ano">ano</span>
+        <span class="a-desc">Notícias, crônicas e argumentos</span>
+        <span class="a-meta">30 perguntas em 3 estações</span>
+      </a>
     </div>
-    <div class="inicio-texto">
-      <div class="estacoes" id="estacoes"></div>
-      <p class="recorde" id="recorde" hidden></p>
-    </div>
-  </section>
-
-  <!-- JOGO -->
-  <section class="tela" id="jogo" aria-label="Jogo">
-    <div class="placar" role="status" aria-live="polite">
-      <div class="caso"><span id="caso-n">Pergunta 1 de 10</span><div class="trem-prog" id="trem-prog" aria-hidden="true"></div></div>
-      <div class="chip"><small>Pontos</small><b id="pontos">0</b></div>
-      <div class="chip combo" id="chip-combo"><small>Combo</small><b id="combo">x0</b></div>
-    </div>
-
-    <div class="palco">
-      <div class="mascote-lateral" data-mascote id="mascote-jogo"></div>
-      <article class="cartao leitura" id="leitura" hidden aria-labelledby="leitura-titulo">
-        <p class="fonte" id="leitura-fonte"></p>
-        <h2 class="leitura-titulo" id="leitura-titulo"></h2>
-        <p class="leitura-autor" id="leitura-autor"></p>
-        <div class="texto-lido" id="leitura-texto"></div>
-        <p class="leitura-aviso">Leia com calma, sem limite de tempo. As 3 perguntas seguintes são sobre este texto e também não têm cronômetro. Você poderá reler o texto durante as perguntas.</p>
-        <button class="btn-grande" id="btn-li" type="button">Li o texto, ver as perguntas</button>
-      </article>
-      <article class="cartao" id="cartao">
-        <div class="tempo" aria-hidden="true"><i id="barra"></i><span id="tempo-txt">1:00</span></div>
-        <p class="fonte" id="fonte"></p>
-        <details class="reler" id="reler" hidden><summary>Reler o texto</summary><div class="texto-lido" id="reler-texto"></div></details>
-        <button class="figura" id="figura" type="button" hidden aria-label="Ampliar a imagem"><img id="figura-img" alt=""></button>
-        <blockquote class="trecho" id="trecho"></blockquote>
-        <h2 class="pergunta" id="pergunta"></h2>
-        <div class="alts" id="alts" role="group" aria-labelledby="pergunta"></div>
-        <div class="retorno" id="retorno" hidden>
-          <p class="retorno-titulo" id="retorno-titulo"></p>
-          <p class="retorno-texto" id="retorno-texto"></p>
-          <button class="btn-grande btn-prox" id="btn-prox" type="button">Próxima pergunta</button>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- FIM -->
-  <section class="tela" id="fim" aria-labelledby="t-fim">
-    <div class="mascote-grande" data-mascote id="mascote-fim"></div>
-    <div class="fim-texto">
-      <p class="etiqueta">Fim da linha</p>
-      <h2 id="t-fim">Maquinista em Treino</h2>
-      <p class="lead" id="fim-resumo"></p>
-      <div class="numeros">
-        <div class="chip"><small>Pontos</small><b id="fim-pontos">0</b></div>
-        <div class="chip"><small>Acertos</small><b id="fim-acertos">0</b></div>
-        <div class="chip"><small>Maior combo</small><b id="fim-combo">0</b></div>
-      </div>
-      <div class="revise" id="revise" hidden>
-        <h3>Pra revisar</h3>
-        <ul id="revise-lista"></ul>
-        <button class="btn-mini" type="button" data-ir="materia">Abrir a matéria</button>
-      </div>
-      <div class="acoes-fim">
-        <button class="btn-grande" id="btn-again" type="button">Jogar de novo</button>
-        <button class="btn-sec" id="btn-outra" type="button" hidden>Ir para a Estação 2</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- MATÉRIA -->
-  <section class="tela pagina" id="materia" aria-labelledby="t-materia">
-    <p class="etiqueta">Matéria</p>
-    <h2 id="t-materia" class="tit-pag">O que a prova cobra de Português, sem enrolação</h2>
-    <p class="lead">São 14 temas que aparecem sempre. Abra um por vez, leia o resumo, veja o exemplo e treine no quiz.</p>
-
-    <div class="topicos">
-
-      <details class="topico" name="mat">
-        <summary><span class="num">1</span><span class="tt">Tema e tese</span><span class="cod">D6 e D7</span></summary>
-        <div class="corpo">
-          <p class="resumo"><strong>Tema</strong> é o assunto de que o texto fala, dito em poucas palavras. <strong>Tese</strong> é a ideia que o autor defende sobre esse assunto, ou seja, a opinião dele.</p>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"Qual é o assunto do texto?", "O tema do texto é", "A ideia defendida pelo autor é".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>Na notícia sobre o filtro do TikTok, o tema são os distúrbios de imagem na sociedade atual. A tese é que as redes sociais pioram esses distúrbios.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Tema responde "sobre o quê?". Tese responde "o que o autor pensa sobre isso?". Desconfie de alternativa que é só um detalhe: o tema abrange o texto inteiro.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="D6">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">2</span><span class="tt">Argumentos</span><span class="cod">D8</span></summary>
-        <div class="corpo">
-          <p class="resumo">Argumento é a razão que sustenta a tese. Os tipos mais cobrados são: <strong>autoridade</strong> (fala de especialista), <strong>exemplificação</strong> (um caso concreto), <strong>comparação</strong>, <strong>causa e consequência</strong>, <strong>alusão histórica</strong> (referência ao passado), <strong>senso comum</strong> (ideia que quase todo mundo aceita sem precisar de prova) e <strong>dados</strong> (números e pesquisas).</p>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"O trecho é um tipo de argumento de", "Qual argumento sustenta a tese?".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>A fala de uma cirurgiã plástica sobre os pacientes que chegam ao consultório é argumento de autoridade. Já "o Carnaval, o Réveillon e o Rock in Rio motivam os turistas" é exemplificação.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Veja quem está falando. Médico, professor, pesquisador ou instituição quer dizer autoridade. Nome de evento ou caso real quer dizer exemplo.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="D8">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">3</span><span class="tt">Quem é quem no texto</span><span class="cod">D2</span></summary>
-        <div class="corpo">
-          <p class="resumo">Para não repetir palavras, o texto usa pronomes e outros termos que retomam o que já foi dito. Descobrir a quem a palavra se refere é seguir a pista para trás.</p>
-          <dl class="lista-def">
-            <dt>que</dt><dd>pode ser trocado por "o qual", "a qual", "os quais", "as quais".</dd>
-            <dt>cujo</dt><dd>indica posse: "o aluno cujo caderno sumiu".</dd>
-            <dt>onde</dt><dd>indica lugar: "a livraria onde ela entrou".</dd>
-            <dt>quem</dt><dd>refere-se a pessoa e vem depois de preposição: "o amigo com quem saí".</dd>
-          </dl>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"A palavra destacada se refere a", "O termo em destaque pode ser substituído por".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>Em "livrar-me logo <mark>dele</mark>", a palavra "dele" retoma o menino. Em "um filtro, <mark>que</mark> vem sendo chamado de galã de novela", o "que" retoma o filtro e equivale a "o qual".</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Troque a palavra pela alternativa e releia a frase. Se o sentido continuar o mesmo, achou.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="D2">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">4</span><span class="tt">Sentido das palavras</span><span class="cod">D3</span></summary>
-        <div class="corpo">
-          <p class="resumo">Uma mesma palavra muda de sentido conforme o contexto. A prova pede que você descubra o significado pelas pistas ao redor, sem usar o dicionário.</p>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"No trecho, a palavra em destaque significa", "tem o sentido de".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>Na carta aberta, "o turismo é a <mark>alavanca</mark> para o resgate da cidade". Alavanca é a ferramenta que ajuda a levantar algo. No texto, vira o que dá impulso: um incentivo.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Leia a frase inteira, substitua a palavra por cada alternativa e veja qual encaixa sem mudar a ideia.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="D3">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">5</span><span class="tt">Efeitos de sentido e figuras de linguagem</span><span class="cod">D18</span></summary>
-        <div class="corpo">
-          <p class="resumo">Quem escreve escolhe palavras para causar um efeito no leitor. Conhecer as figuras de linguagem ajuda a nomear esse efeito.</p>
-          <dl class="lista-def">
-            <dt>Gradação</dt><dd>palavras em ordem crescente (ou decrescente) de intensidade.</dd>
-            <dt>Hipérbole</dt><dd>exagero para dar ênfase.</dd>
-            <dt>Metáfora</dt><dd>comparação sem o "como": "o turismo é a alavanca".</dd>
-            <dt>Prosopopeia</dt><dd>ações humanas dadas a seres que não são humanos: "o vento sussurrava".</dd>
-            <dt>Eufemismo</dt><dd>suavizar algo duro: "ele nos deixou", no lugar de "morreu".</dd>
-            <dt>Diminutivo</dt><dd>pode mostrar afetividade, tamanho pequeno ou até ironia. O contexto diz qual.</dd>
-            <dt>Sentido figurado</dt><dd>a palavra não vale pelo sentido do dicionário, e sim pela ideia que sugere.</dd>
-          </dl>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"O efeito de sentido de", "A expressão sugere", "A figura de linguagem usada é".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>"Não arruma os brinquedos, a cama, o armário, nada!" é uma gradação, porque a bronca vai crescendo. "Podem voar mundos, morrer astros" é hipérbole. "Um livro te pega" usa o verbo pegar no sentido figurado: envolver emocionalmente.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Pergunte a si mesmo qual impressão aquela escolha de palavras provoca em quem lê.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="D18">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">6</span><span class="tt">Pontuação que diz algo</span><span class="cod">D17</span></summary>
-        <div class="corpo">
-          <p class="resumo">Os sinais de pontuação não são enfeite: eles mostram emoção, dúvida e intenção.</p>
-          <dl class="lista-def">
-            <dt>!</dt><dd>espanto, surpresa, alegria, indignação ou ordem.</dd>
-            <dt>?</dt><dd>dúvida ou pergunta, às vezes só provocação.</dd>
-            <dt>...</dt><dd>suspense, hesitação ou ideia que fica no ar.</dd>
-            <dt>" "</dt><dd>fala de alguém, ironia ou palavra estrangeira.</dd>
-            <dt>:</dt><dd>anuncia uma explicação, uma lista ou uma fala.</dd>
-            <dt>travessão</dt><dd>marca a fala de cada personagem num diálogo.</dd>
-          </dl>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"O uso do ponto de exclamação nesse trecho", "As reticências indicam".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>"Parecia que ele não tinha percebido o que pedira<mark>!</mark>" O ponto de exclamação expressa espanto e incredulidade.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Leia a frase em voz alta, com a entonação do sinal. A emoção aparece sozinha.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="D17">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">7</span><span class="tt">Fato e opinião</span><span class="cod">D14</span></summary>
-        <div class="corpo">
-          <p class="resumo"><strong>Fato</strong> é o que pode ser comprovado: acontecimento, data, número. <strong>Opinião</strong> é um julgamento pessoal: gosto, impressão, generalização.</p>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"Há, predominantemente, uma opinião no trecho", "Qual trecho apresenta um fato?".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>"O detetive Poirot jantava com seu amigo Bonnington" é fato. "Os homens geralmente pedem a mesma coisa" é opinião, porque generaliza e ninguém comprovou.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Pergunte se dá pra conferir. Palavras como "acho", "parece", "geralmente", "melhor" e "ótimo" costumam indicar opinião.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="D14">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">8</span><span class="tt">Tipos de linguagem</span><span class="cod">D13</span></summary>
-        <div class="corpo">
-          <p class="resumo">A linguagem muda conforme quem fala, com quem fala e em que situação.</p>
-          <dl class="lista-def">
-            <dt>Formal</dt><dd>vocabulário cuidadoso, sem gírias, de acordo com a norma culta. Aparece em campanhas, leis e notícias.</dd>
-            <dt>Informal ou coloquial</dt><dd>gírias, abreviações ("pra", "tá"), tratamento íntimo como "você" e "te".</dd>
-            <dt>Regional</dt><dd>palavras e jeitos de falar típicos de uma região.</dd>
-            <dt>Científica</dt><dd>termos técnicos e precisão.</dd>
-          </dl>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"A linguagem utilizada é", "Que marcas mostram quem fala e com quem fala?".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>"Para doar sangue, é preciso ter de 16 a 69 anos" é linguagem formal: texto institucional, sem gíria. Já "às vezes um livro te pega" é informal.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Imagine alguém falando aquela frase. Se soaria natural numa conversa com amigos, é informal.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="D13">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">9</span><span class="tt">Causa e consequência</span><span class="cod">D11</span></summary>
-        <div class="corpo">
-          <p class="resumo">A <strong>causa</strong> é o motivo, e a <strong>consequência</strong> é o resultado. Muitas perguntas começam com "porque" e pedem a razão de uma atitude.</p>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"O personagem fez isso porque", "Qual foi a consequência de".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>Poirot desconfiou de que o velho cliente tinha sido assassinado. Por isso procurou o médico dele. A desconfiança é a causa, e a visita ao médico é a consequência.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Volte ao texto e ache o ponto em que a atitude acontece. A razão costuma estar logo antes.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="D11">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">10</span><span class="tt">Conectivos e relações lógicas</span><span class="cod">D15</span></summary>
-        <div class="corpo">
-          <p class="resumo">Conjunções e advérbios ligam as ideias e dizem como elas se relacionam.</p>
-          <dl class="lista-def">
-            <dt>Adição</dt><dd>e, também, além disso.</dd>
-            <dt>Oposição</dt><dd>mas, porém, contudo, todavia.</dd>
-            <dt>Explicação ou causa</dt><dd>pois, porque, já que.</dd>
-            <dt>Conclusão</dt><dd>logo, portanto, então.</dd>
-            <dt>Alternância</dt><dd>ou, ora... ora.</dd>
-            <dt>Conformidade</dt><dd>segundo, conforme, de acordo com.</dd>
-            <dt>Condição</dt><dd>se, caso, desde que.</dd>
-            <dt>Finalidade</dt><dd>para, a fim de que.</dd>
-          </dl>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"Os termos destacados estabelecem uma relação de", "A palavra mas indica".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>"Examinando <mark>ora</mark> um livro, <mark>ora</mark> outro": o ora... ora indica alternância.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Substitua o conectivo por um da lista e veja se a frase continua fazendo sentido.</p></div>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">11</span><span class="tt">Modalização</span><span class="cod">EF89LP16</span></summary>
-        <div class="corpo">
-          <p class="resumo">Modalizadores mostram como o autor encara o que diz: com certeza, com dúvida, como obrigação ou como necessidade.</p>
-          <dl class="lista-def">
-            <dt>Obrigação</dt><dd>deve, tem que, é obrigatório.</dd>
-            <dt>Necessidade</dt><dd>é necessário, precisa, é preciso.</dd>
-            <dt>Possibilidade</dt><dd>talvez, pode ser, possivelmente.</dd>
-            <dt>Certeza</dt><dd>com certeza, evidentemente, sem dúvida.</dd>
-            <dt>Apreciação</dt><dd>felizmente, infelizmente, lamentavelmente. Mostram uma avaliação pessoal, ou seja, subjetividade.</dd>
-          </dl>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"A expressão destacada é um modalizador de".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>"<mark>É necessário</mark> identificar esses distúrbios" é modalizador de necessidade.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Pergunte que atitude o autor mostra diante da informação: certeza, dúvida, dever ou opinião.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="EF89LP16">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">12</span><span class="tt">Gênero e finalidade</span><span class="cod">D12 e D16</span></summary>
-        <div class="corpo">
-          <p class="resumo">Cada gênero textual existe para um fim. Para achar a finalidade, pense em quem escreve, para quem e para quê.</p>
-          <dl class="lista-def">
-            <dt>Notícia e reportagem</dt><dd>informar.</dd>
-            <dt>Propaganda e anúncio</dt><dd>persuadir, convencer a comprar ou a agir.</dd>
-            <dt>Tirinha, charge e cartum</dt><dd>divertir e criticar.</dd>
-            <dt>Crônica</dt><dd>refletir sobre o cotidiano, com humor ou emoção.</dd>
-            <dt>Carta aberta</dt><dd>reivindicar e argumentar em público.</dd>
-            <dt>Poema</dt><dd>expressar emoções com linguagem poética.</dd>
-            <dt>Conto</dt><dd>narrar uma história e entreter.</dd>
-            <dt>Receita e manual</dt><dd>instruir.</dd>
-            <dt>Fábula</dt><dd>contar uma história curta, com animais, que termina em lição de moral.</dd>
-            <dt>Resenha</dt><dd>apresentar e avaliar uma obra, como um livro ou um filme.</dd>
-          </dl>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"A finalidade desse texto é", "O gênero do texto é", "Esse texto foi escrito para".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>O anúncio de chocolate quer persuadir o leitor a comprar. A crônica de Tatiana Belinky quer refletir de forma poética e emocionar.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Se tem preço, marca ou convite, é propaganda. Se tem fala de especialista e dados, é notícia ou reportagem.</p></div>
-          <button class="btn-mini treinar" type="button" data-cod="D12">Treinar este tema</button>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">13</span><span class="tt">Comparar textos</span><span class="cod">D20 e D21</span></summary>
-        <div class="corpo">
-          <p class="resumo">Dois textos podem falar do mesmo tema de jeitos diferentes. Compare o gênero, a linguagem, o público e a opinião de cada um.</p>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"Qual é a informação em comum nesses textos?", "Esses textos apresentam ideias".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>Uma tirinha e uma carta aberta sobre o Rio de Janeiro têm o mesmo tema, a cidade, mas gêneros diferentes. Os autores mostram pontos de vista que se completam.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>Primeiro responda "do que os dois falam?". Só depois pergunte "o que cada um pensa?".</p></div>
-        </div>
-      </details>
-
-      <details class="topico" name="mat">
-        <summary><span class="num">14</span><span class="tt">Narrativa e inferência</span><span class="cod">D10 e D4</span></summary>
-        <div class="corpo">
-          <p class="resumo">Narrativa tem personagens, tempo, lugar, enredo e narrador. O <strong>conflito</strong> é o problema que move a história. O narrador em <strong>1ª pessoa</strong> participa dos fatos ("eu"), e o em <strong>3ª pessoa</strong> conta de fora ("ele"). Inferir é entender o que o texto sugere sem dizer com todas as letras.</p>
-          <div class="caixa como"><h4>Como cai na prova</h4><p>"O ponto de partida da história foi", "Qual é o conflito?", "Entende-se que o eu poético".</p></div>
-          <div class="caixa exemplo"><h4>Exemplo</h4><p>Na crônica "Onde já se viu?", tudo começa com um menino de rua numa livraria pedindo um livro. No poema "Fanatismo", entende-se que o eu poético se prende à pessoa amada de forma intensa.</p></div>
-          <div class="caixa dica"><h4>Truque</h4><p>A inferência precisa ter apoio no texto. Se você teve que inventar, não é a resposta.</p></div>
-        </div>
-      </details>
-
-    </div>
-    <div class="fecho"><button class="btn-grande" type="button" data-ir="inicio">Ir para o quiz</button></div>
-  </section>
-
-  <!-- A PROVA -->
-  <section class="tela pagina" id="prova" aria-labelledby="t-prova">
-    <p class="etiqueta">A prova</p>
-    <h2 id="t-prova" class="tit-pag">Como funciona a prova, passo a passo</h2>
-    <p class="lead">Saber a matéria é metade do caminho. A outra metade é entender como a questão é montada.</p>
-
-    <div class="bloco">
-      <h3>O que é</h3>
-      <div class="texto-branco">
-      <p>O <strong>Saeb</strong> (Sistema de Avaliação da Educação Básica) é a avaliação nacional. O <strong>Paebes</strong> (Programa de Avaliação da Educação Básica do Espírito Santo) é a avaliação em larga escala capixaba, ligada ao Saeb. Ela acompanha a aprendizagem dos estudantes e ajuda a orientar políticas públicas e a melhoria do ensino.</p>
-      <p>As questões do Paebes são elaboradas pelo CAEd, da Universidade Federal de Juiz de Fora, e seguem os mesmos descritores e habilidades do Saeb. O Listão deste jogo é o Preparatório SAEB do 9º ano, da SEDUC.</p>
-      </div>
-    </div>
-
-    <div class="bloco">
-      <h3>Como é uma questão</h3>
-      <div class="anatomia" aria-label="Exemplo de questão com as partes indicadas">
-        <div class="parte"><span class="rotulo">1. Texto-base</span><p class="amostra">"Para doar sangue, é preciso ter de 16 a 69 anos, desde que a primeira doação tenha sido feita até 60 anos."</p><small>Vem com a fonte. Em textos longos, as linhas são numeradas para você achar o trecho.</small></div>
-        <div class="parte"><span class="rotulo">2. Comando</span><p class="amostra">Nesse trecho, a linguagem utilizada é</p><small>É a pergunta. Sublinhe a palavra que diz o que ela quer.</small></div>
-        <div class="parte"><span class="rotulo">3. Alternativas</span><p class="amostra">A) formal. B) científica. C) regional. D) coloquial.</p><small>São sempre quatro, de A a D, e só uma está certa.</small></div>
-        <div class="parte"><span class="rotulo">4. Descritor</span><p class="amostra">D13: identificar as marcas linguísticas que evidenciam o locutor e o interlocutor de um texto.</p><small>Cada questão testa uma habilidade. Você não vê o código na prova, mas ele guia a pergunta.</small></div>
-      </div>
-    </div>
-
-    <div class="bloco">
-      <h3>Passo a passo na hora H</h3>
-      <ol class="passos">
-        <li><strong>Leia o texto até o fim.</strong> Sem pressa na primeira leitura. Olhe o título, a fonte e as imagens.</li>
-        <li><strong>Leia o comando e sublinhe o que ele pede.</strong> Tema, finalidade, sentido, argumento, causa: cada palavra aponta para uma habilidade.</li>
-        <li><strong>Volte ao trecho citado.</strong> Se a pergunta traz uma linha ou uma frase, releia em volta dela.</li>
-        <li><strong>Elimine as alternativas erradas.</strong> Quase sempre duas saem rápido. Sobram duas para comparar com calma.</li>
-        <li><strong>Confira e marque.</strong> Releia o comando e a alternativa escolhida. Não deixe questão em branco.</li>
-      </ol>
-    </div>
-
-    <div class="bloco">
-      <h3>Armadilhas mais comuns</h3>
-      <ul class="armadilhas">
-        <li><strong>Verdade que não responde.</strong> A alternativa está certa em relação ao texto, mas não responde ao que foi perguntado.</li>
-        <li><strong>Detalhe no lugar do tema.</strong> O tema vale para o texto todo, e não para um parágrafo.</li>
-        <li><strong>Palavras extremas.</strong> "Sempre", "nunca" e "apenas" costumam deixar a alternativa falsa.</li>
-        <li><strong>Alternativas parecidas.</strong> Compare palavra por palavra: a diferença está num detalhe.</li>
-        <li><strong>Inventar demais.</strong> Em inferência, a resposta tem apoio no texto, e não na sua imaginação.</li>
-      </ul>
-    </div>
-
-    <div class="bloco">
-      <h3>Palavras do comando e o que elas pedem</h3>
-      <div class="tabela-rol" role="region" aria-label="Palavras do comando" tabindex="0">
-        <table class="tabela">
-          <thead><tr><th>Se a pergunta diz</th><th>Ela quer</th></tr></thead>
-          <tbody>
-            <tr><td>"O assunto" ou "o tema"</td><td>a ideia central do texto inteiro</td></tr>
-            <tr><td>"A finalidade" ou "foi escrito para"</td><td>o objetivo: informar, persuadir, emocionar, instruir</td></tr>
-            <tr><td>"No trecho..., a palavra destacada"</td><td>o sentido pelo contexto, ou a quem ela se refere</td></tr>
-            <tr><td>"O efeito de sentido" ou "sugere"</td><td>a impressão que a escolha de palavras causa</td></tr>
-            <tr><td>"Pode ser substituído por"</td><td>um termo de mesmo sentido que encaixa na frase</td></tr>
-            <tr><td>"Tipo de argumento"</td><td>o nome do recurso usado para convencer</td></tr>
-            <tr><td>"Porque" ou "motivo"</td><td>a causa de um fato ou de uma atitude</td></tr>
-            <tr><td>"Em comum" ou "comparando os textos"</td><td>o que os dois textos compartilham ou o que muda entre eles</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="bloco">
-      <h3>As habilidades do Paebes, por família</h3>
-      <div class="texto-branco"><p>O Listão usa os códigos do Saeb, como D2 e D18. O Paebes usa códigos como D037_P. O texto da habilidade é o mesmo, só o número muda.</p></div>
-      <div class="familias">
-        <div class="familia f1"><h4>Localizar e interpretar</h4><ul>
-          <li>D021: localizar informações explícitas</li>
-          <li>D023: inferir informação implícita</li>
-          <li>D022: inferir o sentido de uma palavra ou expressão</li>
-          <li>D027: diferenciar partes principais das secundárias</li>
-          <li>D028: identificar o tema</li>
-          <li>D057: interpretar texto com material gráfico</li></ul></div>
-        <div class="familia f2"><h4>Gêneros e comparação</h4><ul>
-          <li>D016: identificar a finalidade de textos</li>
-          <li>D017: identificar o gênero</li>
-          <li>D019: comparar formas de tratar uma informação</li>
-          <li>D033: reconhecer posições distintas sobre o mesmo tema</li></ul></div>
-        <div class="familia f3"><h4>Argumentação e opinião</h4><ul>
-          <li>D032: identificar a tese</li>
-          <li>D055: relacionar tese e argumentos</li>
-          <li>D038: distinguir fato de opinião</li></ul></div>
-        <div class="familia f4"><h4>Coesão e efeitos de sentido</h4><ul>
-          <li>D037: repetições e substituições que dão continuidade</li>
-          <li>D039: relações lógico-discursivas</li>
-          <li>D025: efeito da pontuação e de outras notações</li>
-          <li>D053: efeito da escolha de palavra ou expressão</li>
-          <li>D043: efeito dos recursos estilísticos</li>
-          <li>D102: efeito de recursos ortográficos e morfossintáticos</li>
-          <li>D103: marcas linguísticas do locutor e do interlocutor</li></ul></div>
-        <div class="familia f5"><h4>Narrativa e humor</h4><ul>
-          <li>D030: conflito gerador do enredo e elementos da narrativa</li>
-          <li>D024: efeitos de ironia ou humor</li></ul></div>
-      </div>
-    </div>
-
-    <p class="credito texto-branco">Fontes: Coletânea de Itens Paebes 2024 (Secretaria de Estado da Educação do Espírito Santo, com itens do CAEd/UFJF) e Preparatório SAEB, 9º ano, 2025 (SEDUC).</p>
-    <div class="fecho"><button class="btn-grande" type="button" data-ir="inicio">Treinar no quiz</button></div>
   </section>
 </main>
 
-
-<script src="questoes.js?v=37"></script>
-<script src="app.js?v=37"></script>
+<script src="mascote.js?v=40"></script>
+<script src="inicio.js?v=40"></script>
 </body>
 </html>
