@@ -463,3 +463,36 @@ a.marca:hover { text-decoration: underline; }
   .a-meta { margin-top: var(--e1); font-size: .75rem; }
   #escolha .mascote-grande { width: min(130px, 16vh); }
 }
+
+
+/* ===== Página inicial: um botão de cada lado da jacupemba ===== */
+#escolha.ativa { max-width: 1000px; width: 100%; }
+.escolha-grade { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: var(--e6); width: 100%; margin-top: var(--e3); }
+.escolha-grade .ano-card { width: 100%; max-width: 320px; }
+.escolha-grade .a5 { justify-self: end; }
+.escolha-grade .a9 { justify-self: start; }
+.escolha-grade .mascote-grande { width: min(230px, 30vh); margin: 0; }
+@media (max-width: 560px) {
+  .escolha-grade { gap: var(--e2); }
+  .escolha-grade .mascote-grande { width: 84px; }
+  .escolha-grade .ano-card { padding: calc(var(--e4) + 6px) var(--e2) var(--e3); }
+  .escolha-grade .a-num { font-size: 2.5rem; }
+  .escolha-grade .a-ano { font-size: 1rem; }
+  .escolha-grade .a-desc { display: none; }
+  .escolha-grade .a-meta { margin-top: var(--e2); font-size: .6875rem; }
+}
+
+/* A página inicial termina acima do cenário: nada fica por cima das colinas, da estação e da igreja */
+.pagina-inicial main { padding-bottom: calc(var(--alt-cenario) + var(--e3)); }
+
+/* Telas baixas: a página inicial fica mais compacta para não passar por cima do cenário */
+@media (min-width: 561px) and (max-height: 780px) {
+  #escolha.ativa { gap: var(--e2); }
+  #escolha h1 { font-size: clamp(2rem, min(5vw, 7.5vh), 3.5rem); }
+  .escolha-pergunta { margin-top: 0; font-size: 1.25rem; }
+  .escolha-grade { margin-top: var(--e2); }
+  .escolha-grade .mascote-grande { width: min(180px, 25vh); }
+  .escolha-grade .ano-card { padding: calc(var(--e4) + 2px) var(--e4) var(--e3); }
+  .escolha-grade .a-num { font-size: 3.25rem; }
+  .escolha-grade .a-desc { margin-top: var(--e1); }
+}
