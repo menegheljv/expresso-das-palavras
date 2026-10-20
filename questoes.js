@@ -251,7 +251,7 @@ window.QUESTOES = [
     alts: ['formal.', 'regional.', 'científica.', 'coloquial.'],
     certa: 0, listao: { n: 14, gab: 'A' }, d: D.D13
   },
-  /* ---- Texto inteiro (Estação 3): 3 perguntas, ordem e letras do Listão do professor (questões 6, 7 e 8) ---- */
+  /* ---- Texto inteiro (Estação 3): 2 perguntas do Listão do professor (questões 6 e 7); a 8 foi anulada (sem resposta certa) e trocada por uma da crônica da Belinky ---- */
   {
     est: 3, grupo: 'tiktok', fonte: 'Notícia "Filtro do TikTok reaquece debate sobre os distúrbios de imagem"',
     trecho: '"Muitos pacientes chegam ao consultório buscando alterar tantos pontos da aparência e é necessário identificar esses distúrbios para o encaminhamento correto ao psiquiatra", avaliou a cirurgiã plástica.',
@@ -267,11 +267,11 @@ window.QUESTOES = [
     certa: 2, listao: { n: 7, gab: 'C' }, d: D.MOD
   },
   {
-    est: 3, grupo: 'tiktok', fonte: 'Notícia "Filtro do TikTok reaquece debate sobre os distúrbios de imagem"',
-    trecho: '"Nessa fase da vida, a autoestima ainda depende muito de uma boa aparência, logo, aparecer bem nas selfies torna-se quase que uma obrigação. Há <mark>também</mark> o desejo de receber \'likes\' e obter mais \'seguidores\' nas mídias sociais, <mark>já que</mark> os adolescentes pensam nisso como sua posição social. No total, esses fatores motivam muitos jovens a querer se submeter à cirurgia plástica", explica.',
-    pergunta: 'Os termos em destaque estabelecem, respectivamente, uma relação de',
-    alts: ['causa e condição.', 'adição e oposição.', 'finalidade e causa.', 'adição e explicação.'],
-    certa: 3, listao: { n: 8, gab: 'D' }, d: D.D15
+    est: 3, fonte: 'Crônica "Onde já se viu?", de Tatiana Belinky',
+    trecho: 'As pessoas na livraria começaram a observar a cena, incrédulas e curiosas. O menino já estava junto à prateleira, procurando, examinando <mark>ora</mark> um livro, <mark>ora</mark> outro, todo excitado. Um vendedor se aproximou, meio desconfiado, com cara de querer intervir.',
+    pergunta: 'No trecho, as palavras em destaque estabelecem uma relação de',
+    alts: ['adição.', 'oposição.', 'conclusão.', 'alternância.'],
+    certa: 3, d: D.D15
   }
 ];
 
