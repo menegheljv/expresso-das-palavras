@@ -446,6 +446,7 @@ a.marca:hover { text-decoration: underline; }
   transition: transform .12s ease-out, box-shadow .12s ease-out;
 }
 .ano-card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 14px; background: var(--faixa); border-bottom: var(--borda); border-radius: 17px 17px 0 0; }
+.ano-card.a2 { --faixa: var(--amarelo); }
 .ano-card.a5 { --faixa: var(--verde); }
 .ano-card.a9 { --faixa: var(--rosa); }
 .ano-card:hover { transform: translateY(-3px); box-shadow: 0 9px 0 var(--ink); }
@@ -467,14 +468,12 @@ a.marca:hover { text-decoration: underline; }
 
 /* ===== Página inicial: um botão de cada lado da jacupemba ===== */
 #escolha.ativa { max-width: 1000px; width: 100%; }
-.escolha-grade { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: var(--e6); width: 100%; margin-top: var(--e3); }
-.escolha-grade .ano-card { width: 100%; max-width: 320px; }
-.escolha-grade .a5 { justify-self: end; }
-.escolha-grade .a9 { justify-self: start; }
-.escolha-grade .mascote-grande { width: min(230px, 30vh); margin: 0; }
+.escolha-grade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; justify-items: center; gap: var(--e4); width: 100%; margin-top: var(--e3); }
+.escolha-grade .ano-card { width: 100%; max-width: 300px; justify-self: center; }
+.escolha-grade .mascote-grande { grid-column: 1 / -1; width: min(190px, 24vh); margin: 0 0 var(--e2); }
 @media (max-width: 560px) {
   .escolha-grade { gap: var(--e2); }
-  .escolha-grade .mascote-grande { width: 84px; }
+  .escolha-grade .mascote-grande { width: 84px; margin-bottom: 0; }
   .escolha-grade .ano-card { padding: calc(var(--e4) + 6px) var(--e2) var(--e3); }
   .escolha-grade .a-num { font-size: 2.5rem; }
   .escolha-grade .a-ano { font-size: 1rem; }
@@ -491,8 +490,11 @@ a.marca:hover { text-decoration: underline; }
   #escolha h1 { font-size: clamp(2rem, min(5vw, 7.5vh), 3.5rem); }
   .escolha-pergunta { margin-top: 0; font-size: 1.25rem; }
   .escolha-grade { margin-top: var(--e2); }
-  .escolha-grade .mascote-grande { width: min(180px, 25vh); }
+  .escolha-grade .mascote-grande { width: min(130px, 18vh); margin-bottom: 0; }
   .escolha-grade .ano-card { padding: calc(var(--e4) + 2px) var(--e4) var(--e3); }
   .escolha-grade .a-num { font-size: 3.25rem; }
   .escolha-grade .a-desc { margin-top: var(--e1); }
 }
+
+/* Figura grande (emoji) das questões de palavras do 2º ano */
+.emoji-grande { display: block; font-size: 3.5rem; line-height: 1.15; text-align: center; }
