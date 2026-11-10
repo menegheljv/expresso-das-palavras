@@ -1,8 +1,7 @@
 /* Questões de Língua Portuguesa do 2º ano.
    Fontes: (1) Coletânea de Itens 2022-2023 (Paebes Alfa, 2º ano do Ensino Fundamental, SEDU-ES, itens do CAEd/UFJF),
-   16 itens com o gabarito da própria Coletânea; (2) 29 questões criadas para este jogo, sobre as habilidades D08, D09 e D10
+   16 itens com o gabarito da própria Coletânea; (2) 14 questões criadas para este jogo, sobre as habilidades D08, D09 e D10
    (imagens com palavras, escrita de palavras e começo, meio e fim), marcadas como "Questão criada para este jogo".
-   Cada partida sorteia 10 perguntas de cada estação (15 a 16 disponíveis).
    "est" é a estação (1 a 3, da mais fácil à mais difícil). "certa" é o índice da alternativa correta.
    "d" é o descritor/habilidade cobrado. "img" é opcional (arquivo em img/). */
 window.TURMA = { id: '2', nome: '2º ano', tempo: 120, storage: 'dp2' };
@@ -238,109 +237,6 @@ window.QUESTOES = [
     pergunta: 'Nessa frase, o sinal de exclamação (!) mostra',
     alts: ['surpresa ou susto.', 'uma pergunta.', 'um pedido de desculpas.', 'uma lista de coisas.'],
     certa: 0, d: D.P025
-  },
-  /* ============ MAIS QUESTÕES (criadas para este jogo): cada partida sorteia 10 de cada estação ============ */
-  {
-    est: 1, fonte: 'Receita (questão criada para este jogo)',
-    trecho: 'Ingredientes: 2 ovos, 1 xícara de açúcar e 2 xícaras de farinha.<br>Modo de fazer: misture tudo e leve ao forno.',
-    pergunta: 'Esse texto serve para',
-    alts: ['ensinar uma receita.', 'convidar para uma festa.', 'contar uma piada.', 'anunciar uma venda.'],
-    certa: 0, d: D.P016
-  },
-  {
-    est: 1, fonte: 'Cantiga popular (questão criada para este jogo)',
-    trecho: 'O sapo não lava o pé.<br>Não lava porque não quer.<br>Ele mora lá na lagoa.<br>Não lava o pé porque não quer.<br>Mas que chulé!',
-    pergunta: 'Esse texto é um exemplo de',
-    alts: ['cantiga.', 'receita.', 'notícia.', 'bilhete.'],
-    certa: 0, d: D.P016
-  },
-  {
-    est: 1, fonte: CRIADA, trecho: fig('👟'),
-    pergunta: 'Quantas sílabas (pedacinhos) tem a palavra SAPATO?',
-    alts: ['1', '2', '3', '4'],
-    certa: 2, d: D.D09
-  },
-  {
-    est: 1, fonte: 'Placa (questão criada para este jogo)',
-    trecho: 'Placa no corredor: "Cuidado! Piso molhado."',
-    pergunta: 'O que essa placa avisa?',
-    alts: ['Que o chão está molhado.', 'Que a loja está fechada.', 'Que é proibido entrar.', 'Que o elevador quebrou.'],
-    certa: 0, d: D.D08
-  },
-  {
-    est: 1, fonte: 'Pequeno texto (questão criada para este jogo)',
-    trecho: 'Bia tem um gato preto e um cachorro branco. O gato se chama Mimi e o cachorro se chama Totó.',
-    pergunta: 'Como se chama o cachorro de Bia?',
-    alts: ['Totó.', 'Mimi.', 'Bia.', 'Preto.'],
-    certa: 0, d: D.P021
-  },
-
-  {
-    est: 2, fonte: 'Pequena história (questão criada para este jogo)',
-    trecho: 'O patinho Quico nadava sozinho no lago. Ele estava triste porque não tinha amigos. Então a tartaruga Lia o convidou para brincar, e os dois ficaram juntos o dia todo.',
-    pergunta: 'Quem é a personagem principal dessa história?',
-    alts: ['O patinho Quico.', 'A tartaruga Lia.', 'O lago.', 'O dia.'],
-    certa: 0, d: D.P030
-  },
-  {
-    est: 2, fonte: 'Pequeno texto (questão criada para este jogo)',
-    trecho: 'Vovó pegou o casaco, a touca e as luvas antes de sair de casa.',
-    pergunta: 'O que dá para entender desse texto?',
-    alts: ['Que estava frio.', 'Que estava calor.', 'Que era noite de festa.', 'Que a vovó ia nadar.'],
-    certa: 0, d: D.P023
-  },
-  {
-    est: 2, fonte: 'Pequeno texto (questão criada para este jogo)',
-    trecho: 'Rafa abriu o presente, deu um grande sorriso e gritou: "Que legal!"',
-    pergunta: 'Como Rafa ficou?',
-    alts: ['Feliz.', 'Bravo.', 'Com sono.', 'Com medo.'],
-    certa: 0, d: D.P023
-  },
-  {
-    est: 2, fonte: CRIADA, trecho: fig('🐦'),
-    pergunta: 'Qual é o nome da figura, escrito do jeito certo?',
-    alts: ['PASSARINHO', 'PASARINHO', 'PASSARINHU', 'PACARINHO'],
-    certa: 0, d: D.D09
-  },
-  {
-    est: 2, fonte: 'Lista (questão criada para este jogo)',
-    pergunta: 'Qual lista tem só nomes de animais?',
-    alts: ['gato, vaca, pato', 'gato, mesa, pato', 'vaca, bola, sapo', 'pato, lápis, rato'],
-    certa: 0, d: D.D09
-  },
-
-  {
-    est: 3, fonte: 'Meio e fim de uma história (questão criada para este jogo)',
-    trecho: 'Depois, ela tomou café e foi para a escola. No fim do dia, voltou para casa.',
-    pergunta: 'Qual frase deve vir primeiro para a história fazer sentido?',
-    alts: ['Ana acordou bem cedo.', 'Ana foi dormir.', 'Ana jantou com a família.', 'Ana tomou banho antes de dormir.'],
-    certa: 0, d: D.D10
-  },
-  {
-    est: 3, fonte: 'Pequeno texto (questão criada para este jogo)',
-    trecho: 'A noite chegou, a lua apareceu e os grilos começaram a cantar no quintal.',
-    pergunta: 'Quando acontece essa cena?',
-    alts: ['À noite.', 'De manhã.', 'Ao meio-dia.', 'À tarde.'],
-    certa: 0, d: D.P030
-  },
-  {
-    est: 3, fonte: 'Frases (questão criada para este jogo)',
-    pergunta: 'Qual frase é uma pergunta?',
-    alts: ['Você quer brincar?', 'Eu quero brincar.', 'Vamos brincar!', 'Hoje vou brincar.'],
-    certa: 0, d: D.P025
-  },
-  {
-    est: 3, fonte: 'Pequeno texto (questão criada para este jogo)',
-    trecho: 'A abelha voa de flor em flor e leva o néctar para a colmeia. Lá, ela ajuda a fazer o mel.',
-    pergunta: 'Qual é o assunto desse texto?',
-    alts: ['O trabalho da abelha.', 'As flores do jardim.', 'O sabor do mel.', 'O voo dos pássaros.'],
-    certa: 0, d: D.P028
-  },
-  {
-    est: 3, fonte: CRIADA, trecho: fig('🦁'),
-    pergunta: 'Qual é o nome da figura, escrito do jeito certo?',
-    alts: ['LEÃO', 'LEAO', 'LIÃO', 'LEÃU'],
-    certa: 0, d: D.D09
   }
 ];
 
